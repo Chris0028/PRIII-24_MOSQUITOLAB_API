@@ -1,13 +1,13 @@
-package com.PRIII_24_MOSQUITOLAB_API;
+package com.sedes.MosquitoLaboratorio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Priii24MosquitolabApiApplication {
+public class MosquitoLaboratorioApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Priii24MosquitolabApiApplication.class, args);
+		SpringApplication.run(MosquitoLaboratorioApplication.class, args);
 	}
 
 }
