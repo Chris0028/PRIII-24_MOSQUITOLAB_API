@@ -1,0 +1,135 @@
+# Build Folders
+bin/
+obj/
+
+# User-specific files
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Visual Studio temp folders
+.vs/
+_TempPE/
+
+# Visual Studio working files
+*.dbmdl
+*.dbproj.schemaview
+*.pfx
+*.publishsettings
+*.pubxml
+*.pubxml.user
+*.sln*
+*.csproj.user
+
+# Resharper files
+_ReSharper*/
+*.DotSettings.user
+
+# Rider files
+.idea/
+.idea/**
+
+# NCrunch
+.ncrunchsolution
+*.ncrunchproject
+*.ncrunchsolution
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.log
+*.vspscc
+*.vssscc
+
+# NuGet
+*.nupkg
+# NuGet packages
+*.snupkg
+# NuGet Symbol Packages
+.nuget/
+packages/
+# Automatically generated NuGet Package Restore files
+.nuget/packages/
+project.lock.json
+project.fragment.lock.json
+
+# Entity Framework Migrations
+migrations/
+
+# DotNet user secrets
+secrets.json
+
+# DotNet local history
+.history/
+
+# Coverage
+coverage/
+*.coverage
+*.coveragexml
+*.log
+coverage.info
+.lcov
+
+# Logs
+*.log
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Lock file used by SQL Server
+*.ldf
+
+# Common debug and diagnostic files
+.vscode/.history/
+
+# Rider specific files
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Npgsql 
+npgsql.yml
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# Web specific
+wwwroot/node_modules/
+wwwroot/lib/
+wwwroot/dist/
+node_modules/
