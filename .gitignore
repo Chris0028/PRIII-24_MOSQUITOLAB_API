@@ -28,7 +28,6 @@ _TempPE/
 *.publishsettings
 *.pubxml
 *.pubxml.user
-*.sln*
 *.csproj.user
 
 # Resharper files
