@@ -1,4 +1,6 @@
 using MosquitoLaboratorio.DbContext;
+using MosquitoLaboratorio.Repositories.Auth;
+using MosquitoLaboratorio.Services.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped(provider => new DBContext(builder.Configuration.GetConnectionString("PostgreSQLConnection")!));
+
+builder.Services.AddScoped<IAuthRepository,  AuthRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
