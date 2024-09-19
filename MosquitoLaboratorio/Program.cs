@@ -2,7 +2,20 @@ using MosquitoLaboratorio.DbContext;
 using MosquitoLaboratorio.Repositories.Auth;
 using MosquitoLaboratorio.Services.Auth;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173/");
+            policy.WithMethods("GET", "POST", "DELETE", "PATCH");
+            policy.AllowAnyHeader();
+        });
+});
 
 
 builder.Services.AddControllers();
@@ -21,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

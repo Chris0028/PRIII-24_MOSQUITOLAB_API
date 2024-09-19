@@ -2,5 +2,9 @@
 {
     public class JwtManager
     {
+        public JwtManager()
+        {
+            
+        }
     }
 }
