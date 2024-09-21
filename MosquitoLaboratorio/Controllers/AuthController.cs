@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Services.Auth;
 
@@ -13,8 +12,8 @@ namespace MosquitoLaboratorio.Controllers
 
         public AuthController(IAuthService authService) => _authService = authService;
 
-        [HttpGet]
-        public async Task<IActionResult> AuthenticateAsync([FromBody]UserDTO dTO)
+        [HttpPost, Route("login")]
+        public async Task<IActionResult> Authenticate([FromBody] UserDTO dTO)
         {
             var auth = await _authService.Authenticate(dTO.UserName!, dTO.Password!);
             if (auth == null)

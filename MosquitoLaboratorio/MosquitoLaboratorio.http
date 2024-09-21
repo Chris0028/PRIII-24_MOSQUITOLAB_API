@@ -1,6 +1,6 @@
 @MosquitoLaboratorio_HostAddress = http://localhost:5174
 
-GET {{MosquitoLaboratorio_HostAddress}}/weatherforecast/
+GET {{MosquitoLaboratorio_HostAddress}}
 Accept: application/json
 
 ###

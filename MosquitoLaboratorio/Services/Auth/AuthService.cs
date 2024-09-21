@@ -12,9 +12,12 @@ namespace MosquitoLaboratorio.Services.Auth
 
         public async Task<UserDTO> Authenticate(string username, string password)
         {
-            var authenticate = await _authRepository.Authenticate(username, password);
-            var dto = authenticate.ToUserDTO();
-            return dto;
+            var user = await _authRepository.Authenticate(username, password);
+            if(user is not null)
+            {
+                return Mapper.ToUserDTO(user);
+            }
+            return null!;
         }
     }
 }

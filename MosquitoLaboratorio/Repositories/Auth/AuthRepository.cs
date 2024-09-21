@@ -1,23 +1,20 @@
 ﻿
-using Dapper;
-using MosquitoLaboratorio.DbContext;
+using Microsoft.EntityFrameworkCore;
+using MosquitoLaboratorio.Data;
+using MosquitoLaboratorio.Entities;
 
 namespace MosquitoLaboratorio.Repositories.Auth
 {
     public class AuthRepository : IAuthRepository
     {
-        private readonly DBContext _context;
+        private readonly LabMosContext _context;
 
-        public AuthRepository(DBContext context) => _context = context;
+        public AuthRepository(LabMosContext context) => _context = context;
 
-        public async Task<Entities.User> Authenticate(string userName, string password)
+        public async Task<User> Authenticate(string username, string password)
         {
-            using(var connection = _context.GetConnection())
-            {
-                var query = @"SELECT id, username, password, role FROM user WHERE username = @userName AND password = @password";
-                Entities.User? user = await connection.QueryFirstOrDefaultAsync<Entities.User>(query, new { userName = userName, password = password});
-                return user!;
-            }
+            var auth = await _context.Users.FirstOrDefaultAsync(u => u.Username.Equals(username) && u.Password.Equals(password));
+            return auth!;
         }
     }
 }

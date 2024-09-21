@@ -1,7 +1,9 @@
-﻿namespace MosquitoLaboratorio.Repositories.Auth
+﻿using MosquitoLaboratorio.Entities;
+
+namespace MosquitoLaboratorio.Repositories.Auth
 {
     public interface IAuthRepository
     {
-        public Task<Entities.User> Authenticate(string userName, string password);
+        Task<User> Authenticate(string username, string password);  
     }
 }

@@ -9,7 +9,7 @@ namespace MosquitoLaboratorio.Mappers
             return new Entities.User()
             {
                 Id = dto.Id,
-                UserName = dto.UserName!,
+                Username = dto.UserName!,
                 Password = dto.Password!,
                 Role = dto.Role!
             };
@@ -20,7 +20,7 @@ namespace MosquitoLaboratorio.Mappers
             return new UserDTO()
             {
                 Id = dto.Id,
-                UserName = dto.UserName!,
+                UserName = dto.Username!,
                 Password = dto.Password!,
                 Role = dto.Role!
             };
