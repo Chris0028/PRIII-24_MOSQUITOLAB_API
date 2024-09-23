@@ -12,7 +12,7 @@ namespace MosquitoLaboratorio.Controllers
 
         public AuthController(IAuthService authService) => _authService = authService;
 
-        [HttpPost, Route("login")]
+        [HttpPost, Route("SignIn")]
         public async Task<IActionResult> Authenticate([FromBody] UserDTO dTO)
         {
             var auth = await _authService.Authenticate(dTO.UserName!, dTO.Password!);
