@@ -23,13 +23,13 @@ public class Case
     [Required]
     public int DiseaseId { get; set; }
 
-    [Column("patientId")]
+    [Column("caseId")]
     [Required]
-    public long PatientId { get; set; }
+    public long CaseId { get; set; }
 
     [NotMapped]
     public Disease? Disease { get; set; }
 
     [NotMapped]
-    public Patient? Patient { get; set; }
+    public Entities.Case? FkCase { get; set; }
 }

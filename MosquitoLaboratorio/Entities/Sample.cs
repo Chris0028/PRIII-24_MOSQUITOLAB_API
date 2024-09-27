@@ -23,6 +23,9 @@ public class Sample
     [Required]
     public DateTime SampleCollectionDate { get; set; }
 
+    [Column("observation")]
+    public string Observation { get; set; }
+
     [NotMapped]
     public Entities.File? File { get; set; }
 

@@ -19,9 +19,6 @@ public class Disease
     public List<Case>? Cases { get; set; }
 
     [NotMapped]
-    public List<DiseaseFile>? Diseasefiles { get; set; }
-
-    [NotMapped]
     public List<DiseaseSymptom>? Diseasesymptoms { get; set; }
 
     [NotMapped]

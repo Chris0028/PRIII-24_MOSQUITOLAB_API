@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Services.Auth;
+using MosquitoLaboratorio.Utils;
 
 namespace MosquitoLaboratorio.Controllers
 {
@@ -9,8 +10,13 @@ namespace MosquitoLaboratorio.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IConfiguration _configuration;
 
-        public AuthController(IAuthService authService) => _authService = authService;
+        public AuthController(IAuthService authService, IConfiguration configuration)
+        {
+            _authService = authService;
+            _configuration = configuration;
+        }
 
         [HttpPost, Route("SignIn")]
         public async Task<IActionResult> Authenticate([FromBody] UserDTO dTO)
@@ -18,7 +24,8 @@ namespace MosquitoLaboratorio.Controllers
             var auth = await _authService.Authenticate(dTO.UserName!, dTO.Password!);
             if (auth == null)
                 return BadRequest();
-            return Ok(auth);
+            string jwt = JwtManager.GenerateJwtToken(auth.UserName!, auth.Password!, _configuration);
+            return Ok(new {jwt = jwt, user = auth});
         }
     }
 }

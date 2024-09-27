@@ -29,8 +29,8 @@ public class File
     [Column("lastUpdate")]
     public DateTime? Lastupdate { get; set; }
 
-    [NotMapped]
-    public List<DiseaseFile>? Diseasefiles { get; set; }
+    [Column("status")]
+    public short Status { get; set; }
 
     [NotMapped]
     public Patient? Patient { get; set; }

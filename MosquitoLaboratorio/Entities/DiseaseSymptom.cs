@@ -18,6 +18,10 @@ public class DiseaseSymptom
     [Required]
     public int Diseaseid { get; set; }
 
+    [Column("fileId")]
+    [Required]
+    public long FileId { get; set; }
+
     [Column("symptomId")]
     [Required]
     public int Symptomid { get; set; }
@@ -27,4 +31,7 @@ public class DiseaseSymptom
 
     [NotMapped]
     public Symptom? Symptom { get; set; }
+
+    [NotMapped]
+    public Entities.File? File { get; set; }
 }

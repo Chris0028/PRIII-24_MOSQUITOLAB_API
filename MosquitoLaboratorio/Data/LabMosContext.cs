@@ -28,8 +28,6 @@ public class LabMosContext : DbContext
 
     public DbSet<Disease> Diseases { get; set; }
 
-    public DbSet<DiseaseFile> Diseasefiles { get; set; }
-
     public DbSet<DiseaseSymptom> Diseasesymptoms { get; set; }
 
     public DbSet<Doctor> Doctors { get; set; }
