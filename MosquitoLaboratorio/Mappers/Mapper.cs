@@ -1,4 +1,5 @@
 ﻿using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Entities;
 
 namespace MosquitoLaboratorio.Mappers
 {
@@ -23,6 +24,16 @@ namespace MosquitoLaboratorio.Mappers
                 UserName = dto.Username!,
                 Password = dto.Password!,
                 Role = dto.Role!
+            };
+        }
+
+        public static Municipality ToMunicipality(this Entities.Municipality municipality)
+        {
+            return new Municipality()
+            {
+                Id = municipality.Id,
+                Name = municipality.Name!,
+                StateId = municipality.StateId!
             };
         }
     }

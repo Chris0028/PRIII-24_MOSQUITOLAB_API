@@ -24,8 +24,5 @@ public class Contagion
     public long PatientId { get; set; }
 
     [NotMapped]
-    public City? City { get; set; }
-
-    [NotMapped]
     public Patient? Patient { get; set; }
 }

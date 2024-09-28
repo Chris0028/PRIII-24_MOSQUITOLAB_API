@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Repositories.Auth;
+using MosquitoLaboratorio.Repositories.Location;
 using MosquitoLaboratorio.Services.Auth;
+using MosquitoLaboratorio.Services.Location;
 using System.Text;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -18,6 +20,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService,  AuthService>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 
 
 builder.Services.AddCors(options =>

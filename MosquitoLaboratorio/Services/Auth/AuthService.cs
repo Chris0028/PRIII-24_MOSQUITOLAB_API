@@ -14,9 +14,8 @@ namespace MosquitoLaboratorio.Services.Auth
         {
             var user = await _authRepository.Authenticate(username, password);
             if(user is not null)
-            {
                 return Mapper.ToUserDTO(user);
-            }
+
             return null!;
         }
     }
