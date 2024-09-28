@@ -14,8 +14,6 @@ public class LabMosContext : DbContext
 
     public DbSet<Child> Children { get; set; }
 
-    public DbSet<City> Cities { get; set; }
-
     public DbSet<Contagion> Contagions { get; set; }
 
     public DbSet<Country> Countries { get; set; }

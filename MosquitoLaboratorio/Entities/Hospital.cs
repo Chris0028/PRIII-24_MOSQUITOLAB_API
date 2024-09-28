@@ -24,16 +24,16 @@ public class Hospital
     [StringLength(60)]
     public string? Network { get; set; }
 
-    [Column("cityId")]
+    [Column("municipalityId")]
     [Required]
-    public int CityId { get; set; }
+    public int MunicipalityId { get; set; }
 
     [Column("typeId")]
     [Required]
     public int TypeId { get; set; }
 
     [NotMapped]
-    public City? City { get; set; }
+    public Municipality? Municipality { get; set; }
 
     [NotMapped]
     public List<Doctor>? Doctors { get; set; }
