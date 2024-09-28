@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Repositories.Auth;
+using MosquitoLaboratorio.Repositories.File;
 using MosquitoLaboratorio.Services.Auth;
+using MosquitoLaboratorio.Services.File;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -27,6 +29,9 @@ builder.Services.AddDbContext<LabMosContext>(options => options.UseNpgsql(builde
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService,  AuthService>();
+
+builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 var app = builder.Build();
 
