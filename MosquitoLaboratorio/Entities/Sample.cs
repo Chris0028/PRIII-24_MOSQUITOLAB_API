@@ -26,6 +26,11 @@ public class Sample
     [Column("observation")]
     public string Observation { get; set; }
 
+    [Column("status")]
+    [StringLength(15)]
+    [Required]
+    public string Status { get; set; }
+
     [NotMapped]
     public Entities.File? File { get; set; }
 

@@ -27,13 +27,12 @@ namespace MosquitoLaboratorio.Mappers
             };
         }
 
-        public static Municipality ToMunicipality(this Entities.Municipality municipality)
+        public static DiseaseDTO ToDiseaseDTO(this Disease target)
         {
-            return new Municipality()
+            return new DiseaseDTO()
             {
-                Id = municipality.Id,
-                Name = municipality.Name!,
-                StateId = municipality.StateId!
+                Id = target.Id,
+                Name = target.Name
             };
         }
     }
