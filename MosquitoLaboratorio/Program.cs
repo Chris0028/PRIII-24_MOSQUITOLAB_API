@@ -4,6 +4,7 @@ using MosquitoLaboratorio.Repositories.Auth;
 using MosquitoLaboratorio.Repositories.File;
 using MosquitoLaboratorio.Services.Auth;
 using MosquitoLaboratorio.Services.File;
+using MosquitoLaboratorio.Services.Hub;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -33,6 +34,8 @@ builder.Services.AddScoped<IAuthService,  AuthService>();
 builder.Services.AddScoped<IFileRepository, FileRepository>();
 builder.Services.AddScoped<IFileService, FileService>();
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -44,6 +47,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.MapControllers();
 
