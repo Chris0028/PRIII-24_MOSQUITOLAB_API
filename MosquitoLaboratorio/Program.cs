@@ -3,8 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Repositories.Auth;
+using MosquitoLaboratorio.Repositories.File;
 using MosquitoLaboratorio.Services.Auth;
 using System.Text;
+using MosquitoLaboratorio.Services.File;
+using MosquitoLaboratorio.Services.Hub;
+
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -57,6 +61,11 @@ builder.Services.AddAuthentication(opt =>
 
 builder.Services.AddAuthorization();
 
+builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IFileService, FileService>();
+
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -69,6 +78,7 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.MapControllers();
 
