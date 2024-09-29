@@ -32,5 +32,23 @@ namespace MosquitoLaboratorio.Controllers
             }
             return BadRequest();
         }
+
+        [HttpPost, Route("HistoryFileByHospital")]
+        public async Task<IActionResult> GetHistoryByHospitalId(long hospitalID)
+        {
+            var files = await _fileService.GetHistoryByHospitalId(hospitalID);
+            if (files is not null)
+                return Ok(files);
+            return BadRequest("No history files found for this Hospital");
+        }
+
+        [HttpPost, Route("HistoryFileByLaboratory")]
+        public async Task<IActionResult> GetHistoryByLabId(int laboratoryID)
+        {
+            var files = await _fileService.GetHistoryByLabId(laboratoryID);
+            if (files is not null)
+                return Ok(files);
+            return BadRequest("No history files found for this Laboratory");
+        }
     }
 }

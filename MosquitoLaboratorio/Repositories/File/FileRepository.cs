@@ -77,5 +77,24 @@ namespace MosquitoLaboratorio.Repositories.File
             }
         }
 
+        public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
+        {
+            var param = new NpgsqlParameter("p_hospitalId", hospitalID);
+
+            var results = await _context.HistoryFileResults
+                .FromSqlRaw("SELECT * FROM ufcHistoryFileDoctor({0})", param)
+                .ToListAsync();
+            return results;
+        }
+
+        public async Task<List<HistoryFileDTO>> GetHistoryByLabId(int laboratoryID)
+        {
+            var param = new NpgsqlParameter("p_hospitalId", laboratoryID);
+
+            var results = await _context.HistoryFileResults
+                .FromSqlRaw("SELECT * FROM ufcHistoryFileLab({0})", param)
+                .ToListAsync();
+            return results;
+        }
     }
 }

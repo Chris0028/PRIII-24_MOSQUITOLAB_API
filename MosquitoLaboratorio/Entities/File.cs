@@ -31,6 +31,8 @@ public class File
 
     [Column("status")]
     public short Status { get; set; }
+    [Column("code")]
+    public string Code { get; set; }
 
     [NotMapped]
     public Patient? Patient { get; set; }

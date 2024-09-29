@@ -17,5 +17,21 @@ namespace MosquitoLaboratorio.Services.File
                 return total;
             return 0;
         }
+
+        public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
+        {
+            var files = await _fileRepository.GetHistoryByHospitalId(hospitalID);
+            if (files is not null)
+                return files;
+            return null;
+        }
+
+        public async Task<List<HistoryFileDTO>> GetHistoryByLabId(int LaboratoryID)
+        {
+            var files = await _fileRepository.GetHistoryByLabId(LaboratoryID);
+            if (files is not null)
+                return files;
+            return null;
+        }
     }
 }
