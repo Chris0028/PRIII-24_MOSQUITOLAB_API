@@ -15,5 +15,11 @@ namespace MosquitoLaboratorio.Repositories.Location
             var municipalities = await _context.Municipalities.ToListAsync();
             return municipalities!;
         }
+
+        public async Task<List<State>> GetStates()
+        {
+            var states = await _context.States.ToListAsync();
+            return states!;
+        }
     }
 }

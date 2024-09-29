@@ -20,5 +20,15 @@ namespace MosquitoLaboratorio.Services.Location
 
             return null!;
         }
+
+        public async Task<List<State>> GetStates()
+        {
+            var states = await _locationRepository.GetStates();
+
+            if (states is not null) 
+                return states;
+
+            return null!;
+        }
     }
 }

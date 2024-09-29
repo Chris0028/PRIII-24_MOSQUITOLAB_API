@@ -22,5 +22,14 @@ namespace MosquitoLaboratorio.Controllers
             return Ok(municipalities);
         }
 
+        [HttpGet, Route("GetStates")]
+        public async Task<IActionResult> GetStates()
+        {
+            var states = await _locationService.GetStates();
+            if(states == null)
+                return NotFound();
+
+            return Ok(states);
+        }
     }
-}
+}   
