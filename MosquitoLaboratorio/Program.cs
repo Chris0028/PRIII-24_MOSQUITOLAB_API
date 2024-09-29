@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Repositories.Auth;
+using MosquitoLaboratorio.Repositories.Sample;
 using MosquitoLaboratorio.Repositories.File;
 using MosquitoLaboratorio.Services.Auth;
+using MosquitoLaboratorio.Services.Sample;
 using System.Text;
 using MosquitoLaboratorio.Services.File;
 using MosquitoLaboratorio.Services.Hub;
@@ -22,6 +24,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IAuthService,  AuthService>();
+builder.Services.AddScoped<ISampleRepository, SampleRepository>();
+builder.Services.AddScoped<ISampleService, SampleService>();
 
 
 builder.Services.AddCors(options =>

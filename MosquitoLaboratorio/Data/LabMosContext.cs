@@ -68,4 +68,14 @@ public class LabMosContext : DbContext
         modelBuilder.Entity<HistoryFileDTO>().HasNoKey();
         base.OnModelCreating(modelBuilder);
     }
+
+    #region Views
+    public DbSet<SampleDTO> VwSampleList { get; set; }
+    #endregion
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<SampleDTO>().HasNoKey();
+        base.OnModelCreating(modelBuilder);
+    }
 }

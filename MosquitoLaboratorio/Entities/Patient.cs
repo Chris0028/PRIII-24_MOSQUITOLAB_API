@@ -52,6 +52,11 @@ public class Patient
     [Column("userId")]
     public int UserId { get; set; }
 
+    [Column("code")]
+    [StringLength(7)]
+    [Required]
+    public string Code { get; set; }
+
     [NotMapped]
     public List<Case>? Cases { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Entities;
 
 namespace MosquitoLaboratorio.Mappers
 {
@@ -23,6 +24,15 @@ namespace MosquitoLaboratorio.Mappers
                 UserName = dto.Username!,
                 Password = dto.Password!,
                 Role = dto.Role!
+            };
+        }
+
+        public static DiseaseDTO ToDiseaseDTO(this Disease target)
+        {
+            return new DiseaseDTO()
+            {
+                Id = target.Id,
+                Name = target.Name
             };
         }
     }

@@ -34,6 +34,11 @@ public class File
     [Column("code")]
     public string Code { get; set; }
 
+    [Column("code")]
+    [StringLength(10)]
+    [Required]
+    public string Code { get; set; }
+
     [NotMapped]
     public Patient? Patient { get; set; }
 

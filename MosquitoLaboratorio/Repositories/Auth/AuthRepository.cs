@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Entities;
 
