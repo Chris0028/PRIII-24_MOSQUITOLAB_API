@@ -15,16 +15,16 @@ public class Contagion
     [Required]
     public string Neighborhood { get; set; }
 
-    [Column("cityId")]
+    [Column("municipalityId")]
     [Required]
-    public int CityId { get; set; }
+    public int MunicipalityId { get; set; }
 
     [Column("patientId")]
     [Required]
     public long PatientId { get; set; }
 
     [NotMapped]
-    public City? City { get; set; }
+    public Municipality? Municipality { get; set; }
 
     [NotMapped]
     public Patient? Patient { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Entities;
 
 namespace MosquitoLaboratorio.Data;
@@ -57,4 +58,14 @@ public class LabMosContext : DbContext
     public DbSet<Typehospital> Typehospitals { get; set; }
 
     public DbSet<User> Users { get; set; }
+
+    #region Views
+    public DbSet<SampleDTO> VwSampleList { get; set; }
+    #endregion
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<SampleDTO>().HasNoKey();
+        base.OnModelCreating(modelBuilder);
+    }
 }

@@ -20,8 +20,5 @@ public class Municipality
     public int StateId { get; set; }
 
     [NotMapped]
-    public List<City> Cities { get; set; }
-
-    [NotMapped]
     public State? State { get; set; }
 }
