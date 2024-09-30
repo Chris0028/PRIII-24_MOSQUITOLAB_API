@@ -11,9 +11,9 @@ namespace MosquitoLaboratorio.Repositories.Sample
 
         public SampleRepository(LabMosContext context) => _context = context;
 
-        public async Task<List<SampleDTO>> GetSamples()
+        public async Task<List<SampleDTO>> GetSamples(SampleDTO? sampleDTO)
         {
-            var samples = await _context.VwSampleList.ToListAsync();
+            var samples = await _context.GetSamplesAsync(sampleDTO);
             return samples;
         }
 

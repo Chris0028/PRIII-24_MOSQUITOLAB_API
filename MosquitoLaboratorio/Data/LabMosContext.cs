@@ -61,7 +61,15 @@ public class LabMosContext : DbContext
 
     #region DTOs
     public DbSet<HistoryFileDTO> HistoryFileResults { get; set; }
+    public DbSet<SampleDTO> UfcSampleList { get; set; }
     #endregion
+
+    public async Task<List<SampleDTO>> GetSamplesAsync(SampleDTO sampleDTO)
+    {
+        return await UfcSampleList
+            .FromSqlInterpolated($"SELECT * FROM ufcsamplelist({sampleDTO?.SampleId ?? null},{sampleDTO?.PatientFullName ?? null},{sampleDTO?.DiseaseName ?? null},{sampleDTO?.RegisterDate ?? null})")
+            .ToListAsync();
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -70,9 +78,4 @@ public class LabMosContext : DbContext
 
         base.OnModelCreating(modelBuilder);
     }
-
-    #region Views
-    public DbSet<SampleDTO> VwSampleList { get; set; }
-    #endregion
-
 }
