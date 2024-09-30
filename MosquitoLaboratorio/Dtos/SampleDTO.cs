@@ -2,29 +2,27 @@
 
 namespace MosquitoLaboratorio.Dtos
 {
-
-    [Table("vwsamplelist")]
     public class SampleDTO
     {
-        [Column("sampleId")]
-        public int SampleId { get; set; }
+        [Column("id")]
+        public int? SampleId { get; set; } = null;
 
-        [Column("registerHour")]
-        public string RegisterHour { get; set; }
+        [Column("registerhour")]
+        public string? RegisterHour { get; set; } = null;
 
-        [Column("registerDate")]
-        public DateTime RegisterDate { get; set; }
+        [Column("registerdate")]
+        public DateTime? RegisterDate { get; set; } = null;
 
-        [Column("patientFullName")]
-        public string PatientFullName { get; set; }
+        [Column("patientfullname")]
+        public string? PatientFullName { get; set; } = null;
 
-        [Column("diseaseName")]
-        public string DiseaseName { get; set; }
+        [Column("diseasename")]
+        public string? DiseaseName { get; set; } = null;
 
-        [Column("sampleManager")]
-        public string SampleManager { get; set; }
+        [Column("samplemanager")]
+        public string? SampleManager { get; set; } = null;
 
         [Column("contact")]
-        public string Contact { get; set; }
+        public string? Contact { get; set; } = null;
     }
 }

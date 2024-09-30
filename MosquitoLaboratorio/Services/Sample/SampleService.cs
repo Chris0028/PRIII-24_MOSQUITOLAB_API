@@ -10,9 +10,9 @@ namespace MosquitoLaboratorio.Services.Sample
 
         public SampleService(ISampleRepository sampleRepository) => _sampleRepository = sampleRepository;
 
-        public async Task<List<SampleDTO>> GetSamples()
+        public async Task<List<SampleDTO>> GetSamples(SampleDTO? sampleDTO)
         {
-            var samples = await _sampleRepository.GetSamples();
+            var samples = await _sampleRepository.GetSamples(sampleDTO);
             if (samples != null)
                 return samples;
             return null!;
