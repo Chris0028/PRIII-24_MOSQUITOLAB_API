@@ -4,7 +4,7 @@
     {
         public string Result { get; set; }
         public short Status { get; set; }
-        public string Code { get; set; }
+        public string? Code { get; set; }
         public string Ci { get; set; }
         public string Names { get; set; }
         public string LastName { get; set; }
