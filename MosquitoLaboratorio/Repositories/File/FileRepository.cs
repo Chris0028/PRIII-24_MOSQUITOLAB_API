@@ -99,12 +99,10 @@ namespace MosquitoLaboratorio.Repositories.File
             return results;
         }
 
-        public async Task<List<HistoryFileDTO>> GetHistoryByLabId(int laboratoryID)
+        public async Task<List<HistoryFileDTO>> GetHistoryForLab()
         {
-            var param = new NpgsqlParameter("p_hospitalId", laboratoryID);
-
             var results = await _context.HistoryFileResults
-                .FromSqlRaw("SELECT * FROM ufcHistoryFileLab({0})", param)
+                .FromSqlRaw("SELECT * FROM ufcHistoryFileLab()")
                 .ToListAsync();
             return results;
         }

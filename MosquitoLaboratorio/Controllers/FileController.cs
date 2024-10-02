@@ -42,10 +42,10 @@ namespace MosquitoLaboratorio.Controllers
             return BadRequest("No history files found for this Hospital");
         }
 
-        [HttpPost, Route("HistoryFileByLaboratory")]
-        public async Task<IActionResult> GetHistoryByLabId(int laboratoryID)
+        [HttpGet, Route("HistoryFileByLaboratory")]
+        public async Task<IActionResult> GetHistoryForLab()
         {
-            var files = await _fileService.GetHistoryByLabId(laboratoryID);
+            var files = await _fileService.GetHistoryForLab();
             if (files is not null)
                 return Ok(files);
             return BadRequest("No history files found for this Laboratory");
