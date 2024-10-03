@@ -2,7 +2,8 @@
 {
     public class HistoryFileDTO
     {
-        public string Result { get; set; }
+        public long Id { get; set; }
+        public string Result { get; set; }  //
         public short Status { get; set; }
         public string? Code { get; set; }
         public string Ci { get; set; }
