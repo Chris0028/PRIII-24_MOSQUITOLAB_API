@@ -64,13 +64,6 @@ public class LabMosContext : DbContext
     public DbSet<SampleDTO> UfcSampleList { get; set; }
     #endregion
 
-    public async Task<List<SampleDTO>> GetSamplesAsync(SampleDTO sampleDTO)
-    {
-        return await UfcSampleList
-            .FromSqlInterpolated($"SELECT * FROM ufcsamplelist({sampleDTO?.SampleId ?? null},{sampleDTO?.PatientFullName ?? null},{sampleDTO?.DiseaseName ?? null},{sampleDTO?.RegisterDate ?? null})")
-            .ToListAsync();
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<SampleDTO>().HasNoKey();
