@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Services.Sample;
 
 namespace MosquitoLaboratorio.Controllers
@@ -11,10 +12,10 @@ namespace MosquitoLaboratorio.Controllers
 
         public SampleController(ISampleService sampleService) => _sampleService = sampleService;
 
-        [HttpGet, Route("All")]
-        public async Task<IActionResult> GetSamples()
+        [HttpPost, Route("All")]
+        public async Task<IActionResult> GetSamples([FromBody]SampleDTO? sampleDTO)
         {
-            var samples = await _sampleService.GetSamples();
+            var samples = await _sampleService.GetSamples(sampleDTO);
             if(samples != null)
                 return Ok(samples);
             return BadRequest();

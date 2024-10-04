@@ -61,18 +61,13 @@ public class LabMosContext : DbContext
 
     #region DTOs
     public DbSet<HistoryFileDTO> HistoryFileResults { get; set; }
+    public DbSet<SampleDTO> UfcSampleList { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<HistoryFileDTO>().HasNoKey();
         modelBuilder.Entity<SampleDTO>().HasNoKey();
 
         base.OnModelCreating(modelBuilder);
     }
-
-    #region Views
-    public DbSet<SampleDTO> VwSampleList { get; set; }
-    #endregion
-
 }
