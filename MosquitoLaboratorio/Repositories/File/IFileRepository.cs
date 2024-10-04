@@ -8,5 +8,6 @@ namespace MosquitoLaboratorio.Repositories.File
         Task<int> CreateFile(CreateFileDTO fileDto);
         Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID);
         Task<List<HistoryFileDTO>> GetHistoryForLab(int laboratoryID);
+        Task<long> GetLastFileId();
     }
 }
