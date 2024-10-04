@@ -34,7 +34,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("HistoryFileByHospital")]
-        public async Task<IActionResult> GetHistoryByHospitalId(long hospitalID)
+        public async Task<IActionResult> GetHistoryByHospitalId([FromBody] long hospitalID)
         {
             var files = await _fileService.GetHistoryByHospitalId(hospitalID);
             if (files is not null)
@@ -42,10 +42,10 @@ namespace MosquitoLaboratorio.Controllers
             return BadRequest("No history files found for this Hospital");
         }
 
-        [HttpGet, Route("GetHistoryForLab")]
-        public async Task<IActionResult> GetHistoryForLab()
+        [HttpPost, Route("GetHistoryForLab")]
+        public async Task<IActionResult> GetHistoryForLab([FromBody] int laboratoryID)
         {
-            var files = await _fileService.GetHistoryForLab();
+            var files = await _fileService.GetHistoryForLab(laboratoryID);
             if (files is not null)
                 return Ok(files);
             return BadRequest("No history files found for this Laboratory");

@@ -66,6 +66,7 @@ public class LabMosContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<HistoryFileDTO>().HasNoKey();
         modelBuilder.Entity<SampleDTO>().HasNoKey();
 
         base.OnModelCreating(modelBuilder);

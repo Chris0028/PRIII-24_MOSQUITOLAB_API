@@ -26,9 +26,9 @@ namespace MosquitoLaboratorio.Services.File
             return null;
         }
 
-        public async Task<List<HistoryFileDTO>> GetHistoryForLab()
+        public async Task<List<HistoryFileDTO>> GetHistoryForLab(int laboratoryID)
         {
-            var files = await _fileRepository.GetHistoryForLab();
+            var files = await _fileRepository.GetHistoryForLab(laboratoryID);
             if (files is not null)
                 return files;
             return null;
