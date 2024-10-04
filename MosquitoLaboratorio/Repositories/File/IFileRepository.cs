@@ -1,4 +1,5 @@
 ﻿using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Entities;
 
 namespace MosquitoLaboratorio.Repositories.File
 {

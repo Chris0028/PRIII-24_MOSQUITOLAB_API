@@ -27,7 +27,7 @@
         public string? PatientLastName { get; set; }
         public string? PatientSecondLastName { get; set; }
         public string? PatientGender { get; set; }
-        public string?  PatientCi { get; set; }
+        public string? PatientCi { get; set; }
         public string? PatientPhone { get; set; }
         public DateTime? PatientBirthDate { get; set; }
         public string? Disease { get; set; } 

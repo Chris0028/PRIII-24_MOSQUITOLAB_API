@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Entities;
 using Npgsql;
 
 namespace MosquitoLaboratorio.Repositories.File
@@ -107,6 +108,14 @@ namespace MosquitoLaboratorio.Repositories.File
                 .FromSqlRaw("SELECT * FROM ufchistorylab({0})", param)
                 .ToListAsync();
             return results;
+        }
+
+        public async Task<long> GetLastFileId()
+        {
+            return await _context.Files
+                .OrderByDescending(f => f.Id)
+                .Select(f => f.Id)
+                .FirstOrDefaultAsync();
         }
     }
 }
