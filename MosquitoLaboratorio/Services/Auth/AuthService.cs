@@ -1,6 +1,7 @@
 ﻿using MosquitoLaboratorio.Dtos;
-using MosquitoLaboratorio.Mappers;
+using MosquitoLaboratorio.Dtos.Auth;
 using MosquitoLaboratorio.Repositories.Auth;
+using Newtonsoft.Json;
 
 namespace MosquitoLaboratorio.Services.Auth
 {
@@ -10,14 +11,21 @@ namespace MosquitoLaboratorio.Services.Auth
 
         public AuthService(IAuthRepository authRepository) => _authRepository = authRepository;
 
-        public async Task<UserDTO> Authenticate(string username, string password)
+        public async Task<AuthUserDTO> Authenticate(UserDTO dTO)
         {
-            var user = await _authRepository.Authenticate(username, password);
-            if(user is not null)
+            var user = await _authRepository.Authenticate(dTO);
+            if (user.Role!.Equals("Doctor"))
             {
-                return Mapper.ToUserDTO(user);
+                var doctor = JsonConvert.DeserializeObject<DoctorAuth>(user.Info);
+                user.AditionalInfo = doctor!;
             }
-            return null!;
+            else if (user.Role.Equals("Employee"))
+            {
+                var employee = JsonConvert.DeserializeObject<EmployeeAuth>(user.Info);
+                user.AditionalInfo = employee!;
+            }
+            user.Info = null!;
+            return user;
         }
     }
 }

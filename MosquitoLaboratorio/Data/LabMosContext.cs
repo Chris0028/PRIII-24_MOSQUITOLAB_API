@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Dtos.Auth;
 using MosquitoLaboratorio.Entities;
 
 namespace MosquitoLaboratorio.Data;
@@ -62,12 +63,14 @@ public class LabMosContext : DbContext
     #region DTOs
     public DbSet<HistoryFileDTO> HistoryFileResults { get; set; }
     public DbSet<SampleDTO> UfcSampleList { get; set; }
+    public DbSet<AuthUserDTO> UfcUserAuth { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<HistoryFileDTO>().HasNoKey();
         modelBuilder.Entity<SampleDTO>().HasNoKey();
+        modelBuilder.Entity<AuthUserDTO>().HasNoKey();
 
         base.OnModelCreating(modelBuilder);
     }
