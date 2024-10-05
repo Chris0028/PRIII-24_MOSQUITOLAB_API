@@ -12,9 +12,9 @@ public class Country
 
     [Column("name")]
     [StringLength(60)]
-    [Required]
-    public string Name { get; set; }
+    public string Name { get; set; } 
 
+    [InverseProperty("Country")]
     [NotMapped]
     public List<State>? States { get; set; }
 }

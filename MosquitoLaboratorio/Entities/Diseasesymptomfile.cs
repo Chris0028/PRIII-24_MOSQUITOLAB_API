@@ -4,36 +4,40 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MosquitoLaboratorio.Entities;
 
 /// <summary>
-/// caseType es &quot;Confirmado&quot; o &quot;Sospechoso&quot;, method es &quot;Por Laboratorio&quot; o &quot;Por Nexo Epidemiológico&quot;
+/// S 
 /// </summary>
-[Table("case")]
-public class Case
+[Table("diseasesymptomfile")]
+public class Diseasesymptomfile
 {
     [Key]
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("caseType")]
-    [StringLength(10)]
-    public string CaseType { get; set; }
-
-    [Column("method")]
-    [StringLength(30)]
-    public string? Method { get; set; }
+    [Column("symptomPresent")]
+    [StringLength(50)]
+    public string SymptomPresent { get; set; }
 
     [Column("diseaseId")]
     public int DiseaseId { get; set; }
+
+    [Column("symptomId")]
+    public int SymptomId { get; set; }
 
     [Column("fileId")]
     public long FileId { get; set; }
 
     [ForeignKey("DiseaseId")]
-    [InverseProperty("Cases")]
+    [InverseProperty("Diseasesymptomfiles")]
     [NotMapped]
     public Disease? Disease { get; set; }
 
     [ForeignKey("FileId")]
-    [InverseProperty("Cases")]
+    [InverseProperty("Diseasesymptomfiles")]
     [NotMapped]
     public File? File { get; set; }
+
+    [ForeignKey("SymptomId")]
+    [InverseProperty("Diseasesymptomfiles")]
+    [NotMapped]
+    public Symptom? Symptom { get; set; }
 }

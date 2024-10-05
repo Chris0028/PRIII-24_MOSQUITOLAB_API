@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MosquitoLaboratorio.Entities;
 
+/// <summary>
+/// gender = F o M, lastUpdateUserId = id del ultimo usuario que modifico el registro, userId = usuario que creo el registro
+/// </summary>
 [Table("patient")]
 public class Patient
 {
@@ -10,14 +13,12 @@ public class Patient
     [Column("id")]
     public long Id { get; set; }
 
-    [Column("names")]
+    [Column("name")]
     [StringLength(60)]
-    [Required]
-    public string Names { get; set; }
+    public string Name { get; set; } 
 
     [Column("lastName")]
     [StringLength(60)]
-    [Required]
     public string LastName { get; set; }
 
     [Column("secondLastName")]
@@ -25,56 +26,61 @@ public class Patient
     public string? SecondLastName { get; set; }
 
     [Column("gender")]
-    [Required]
+    [MaxLength(1)]
     public char Gender { get; set; }
 
     [Column("ci")]
     [StringLength(30)]
-    [Required]
-    public string Ci { get; set; }
+    public string Ci { get; set; } 
+
+    [Column("birthDate")]
+    public DateTime BirthDate { get; set; }
 
     [Column("phone")]
     [StringLength(10)]
-    [Required]
-    public string Phone { get; set; }
+    public string Phone { get; set; } 
 
-    [Column("birthDate")]
-    [Required]
-    public DateTime Birthdate { get; set; }
+    [Column("code")]
+    [StringLength(7)]
+    public string Code { get; set; } 
 
-    [Column("registerDate")]
-    [Required]
-    public DateTime Registerdate { get; set; }
+    [Column("registerDate", TypeName = "timestamp without time zone")]
+    public DateTime RegisterDate { get; set; }
 
-    [Column("lastUpdate")]
+    [Column("lastUpdate", TypeName = "timestamp without time zone")]
     public DateTime? LastUpdate { get; set; }
 
     [Column("userId")]
     public int UserId { get; set; }
 
-    [Column("code")]
-    [StringLength(7)]
-    [Required]
-    public string Code { get; set; }
+    [Column("lastUpdateUserId")]
+    public int? LastUpdateUserId { get; set; }
 
-    [NotMapped]
-    public List<Case>? Cases { get; set; }
-
+    [InverseProperty("Patient")]
     [NotMapped]
     public List<Child>? Children { get; set; }
 
+    [InverseProperty("Patient")]
     [NotMapped]
     public List<Contagion>? Contagions { get; set; }
 
+    [InverseProperty("Patient")]
     [NotMapped]
     public List<Direction>? Directions { get; set; }
 
+    [InverseProperty("Patient")]
     [NotMapped]
     public List<File>? Files { get; set; }
 
+    [InverseProperty("Patient")]
     [NotMapped]
     public List<Hospitalized>? Hospitalizeds { get; set; }
 
+    [InverseProperty("Patient")]
+    [NotMapped]
+    public List<InsurancePatient>? InsurancePatients { get; set; }
+
+    [InverseProperty("Patient")]
     [NotMapped]
     public List<Pregnant>? Pregnants { get; set; }
 }

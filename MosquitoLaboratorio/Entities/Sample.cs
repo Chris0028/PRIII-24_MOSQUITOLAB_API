@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MosquitoLaboratorio.Entities;
 
+/// <summary>
+/// status &quot;Con resultado&quot; o &quot;Sin resultado&quot;
+/// </summary>
 [Table("sample")]
 public class Sample
 {
@@ -12,28 +15,34 @@ public class Sample
 
     [Column("sampleType")]
     [StringLength(50)]
-    [Required]
     public string SampleType { get; set; }
 
-    [Column("fileId")]
-    [Required]
-    public long FileId { get; set; }
-
     [Column("sampleCollectionDate")]
-    [Required]
     public DateTime SampleCollectionDate { get; set; }
 
     [Column("observation")]
-    public string Observation { get; set; }
+    public string? Observation { get; set; }
+
+    [Column("registerDate", TypeName = "timestamp without time zone")]
+    public DateTime RegisterDate { get; set; }
 
     [Column("status")]
     [StringLength(15)]
-    [Required]
     public string Status { get; set; }
 
+    [Column("fileId")]
+    public long FileId { get; set; }
+
+    [ForeignKey("FileId")]
+    [InverseProperty("Samples")]
     [NotMapped]
     public Entities.File? File { get; set; }
 
+    [InverseProperty("Sample")]
+    [NotMapped]
+    public List<SampleManager>? SampleManagers { get; set; }
+
+    [InverseProperty("Sample")]
     [NotMapped]
     public List<Test>? Tests { get; set; }
 }

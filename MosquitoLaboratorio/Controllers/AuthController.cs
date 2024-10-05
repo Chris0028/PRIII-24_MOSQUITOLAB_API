@@ -26,7 +26,7 @@ namespace MosquitoLaboratorio.Controllers
                 return BadRequest();
             var jwtManager = new JwtManager();
             string jwt = jwtManager.GenerateJwtToken(auth.UserId, auth.UserName!, auth.Role!, _configuration);
-            return Ok(new {jwt = jwt, info = auth.AditionalInfo});
+            return Ok(new { jwt = jwt, info = auth.AditionalInfo });
         }
     }
 }

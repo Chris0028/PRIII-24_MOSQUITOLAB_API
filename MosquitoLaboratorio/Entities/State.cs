@@ -12,16 +12,17 @@ public class State
 
     [Column("name")]
     [StringLength(60)]
-    [Required]
     public string Name { get; set; }
 
     [Column("countryId")]
-    [Required]
     public int CountryId { get; set; }
 
+    [ForeignKey("CountryId")]
+    [InverseProperty("States")]
     [NotMapped]
     public Country? Country { get; set; }
 
+    [InverseProperty("State")]
     [NotMapped]
-    public List<Municipality> Municipalities { get; set; }
+    public List<Municipality>? Municipalities { get; set; }
 }

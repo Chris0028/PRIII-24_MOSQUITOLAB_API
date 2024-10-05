@@ -23,9 +23,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<IAuthService,  AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISampleRepository, SampleRepository>();
 builder.Services.AddScoped<ISampleService, SampleService>();
+builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 
 builder.Services.AddCors(options =>
@@ -64,9 +66,6 @@ builder.Services.AddAuthentication(opt =>
 });
 
 builder.Services.AddAuthorization();
-
-builder.Services.AddScoped<IFileRepository, FileRepository>();
-builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddSignalR();
 
