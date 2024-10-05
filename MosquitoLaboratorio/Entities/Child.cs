@@ -11,14 +11,14 @@ public class Child
     public int Id { get; set; }
 
     [Column("parent")]
-    [StringLength(200)]
-    [Required]
-    public string Parent { get; set; }
+    [StringLength(120)]
+    public string? Parent { get; set; }
 
     [Column("patientId")]
-    [Required]
-    public long Patientid { get; set; }
+    public long PatientId { get; set; }
 
+    [ForeignKey("PatientId")]
+    [InverseProperty("Children")]
     [NotMapped]
-    public Patient? Patient { get; set; } 
+    public Patient? Patient { get; set; }
 }

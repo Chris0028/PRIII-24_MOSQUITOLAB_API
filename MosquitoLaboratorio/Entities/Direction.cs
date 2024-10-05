@@ -10,36 +10,35 @@ public class Direction
     [Column("id")]
     public int Id { get; set; }
 
+    [Column("city")]
+    [StringLength(100)]
+    public string? City { get; set; }
+
     [Column("neighborhood")]
     [StringLength(200)]
-    [Required]
-    public string Neighborhood { get; set; }
+    public string? Neighborhood { get; set; }
 
     [Column("latitude")]
     [StringLength(60)]
-    [Required]
     public string Latitude { get; set; }
 
     [Column("longitude")]
     [StringLength(60)]
-    [Required]
     public string Longitude { get; set; }
 
     [Column("municipalityId")]
-    [Required]
     public int MunicipalityId { get; set; }
 
-    [Column("city")]
-    [Required]
-    public string City { get; set; }
-
     [Column("patientId")]
-    [Required]
     public long PatientId { get; set; }
 
+    [ForeignKey("MunicipalityId")]
+    [InverseProperty("Directions")]
     [NotMapped]
     public Municipality? Municipality { get; set; }
 
+    [ForeignKey("PatientId")]
+    [InverseProperty("Directions")]
     [NotMapped]
     public Patient? Patient { get; set; }
 }

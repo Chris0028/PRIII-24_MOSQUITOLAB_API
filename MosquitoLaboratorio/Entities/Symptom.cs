@@ -12,9 +12,9 @@ public class Symptom
 
     [Column("symptomName")]
     [StringLength(100)]
-    [Required]
     public string SymptomName { get; set; }
 
+    [InverseProperty("Symptom")]
     [NotMapped]
-    public List<DiseaseSymptom>? Diseasesymptoms { get; set; }
+    public List<Diseasesymptomfile> Diseasesymptomfiles { get; set; }
 }

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace MosquitoLaboratorio.Utils
 {
-    public static class JwtManager
+    public class JwtManager
     {
-        public static string GenerateJwtToken(string username, string role, IConfiguration configuration)
+        public string GenerateJwtToken(int userId, string username, string role, IConfiguration configuration)
         {
             var jwtSettings = configuration.GetSection("Jwt");
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["Key"]!));
@@ -15,7 +15,8 @@ namespace MosquitoLaboratorio.Utils
             var claims = new List<Claim>() 
             {
                 new Claim(JwtRegisteredClaimNames.Sub, username),
-                new Claim(ClaimTypes.Role, role)
+                new Claim("role", role),
+                new Claim("userId", userId.ToString())
             };
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
