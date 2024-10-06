@@ -1,53 +1,86 @@
-﻿namespace MosquitoLaboratorio.Dtos
+﻿using System.Text.Json.Serialization;
+
+namespace MosquitoLaboratorio.Dtos
 {
     public class CreateFileDTO
     {
-        public string? CaseType { get; set; }
-        public string? CaseMethod { get; set; }
-        public int? DiseaseId { get; set; }
-        public string? Parent { get; set; } 
-        public string? Neighborhood { get; set; }
-        public int? MunicipalityId { get; set; }
-        public decimal? Latitude { get; set; }
-        public decimal? Longitude { get; set; }
-        public string? City { get; set; }
-        public short? DischargeStatus { get; set; }
-        public int? DischargeId { get; set; }
-        public DateTime? DischargeDate { get; set; } 
-        public string? Observations { get; set; } 
-        public string? HospitalName { get; set; } 
-        public short? HospitalizedType { get; set; }
-        public DateTime? EntryDate { get; set; } 
-        public string? HospitalNameU { get; set; } 
-        public short? HospitalizedTypeU { get; set; }
-        public DateTime? EntryDateU { get; set; }
-        public string? PatientCode { get; set; }
-        public string? FileCode { get; set; }
-        public string? PatientNames { get; set; }
-        public string? PatientLastName { get; set; }
-        public string? PatientSecondLastName { get; set; }
-        public string? PatientGender { get; set; }
-        public string? PatientCi { get; set; }
-        public string? PatientPhone { get; set; }
-        public DateTime? PatientBirthDate { get; set; }
-        public string? Disease { get; set; } 
-        public DateTime? LastMenstruationDate { get; set; } 
-        public DateTime? ChildBirthDate { get; set; }
-        public string? SampleType { get; set; }
-        public DateTime? SampleCollectionDate { get; set; }
-        public string? EpidemiologicalNumberWeek { get; set; }
-        public DateTime? SymptomsDate { get; set; }
-        public int? UserId { get; set; }
-        public int[]? Symptoms { get; set; }
-        public char[]? IsSymptomsPresent { get; set; }
-        public string? SampleObservation { get; set; } 
-        public string? DiagnosticMethod { get; set; }
-        public string? TestResult { get; set; }
-        public string? TestObservation { get; set; } 
-        public int? LaboratoryId { get; set; }
-        public string? InsuranceRecord { get; set; }
+        // Parametros Patient
+        public string PatientName { get; set; }
+        public string PatientLastName { get; set; }
+        public string PatientSecondLastName { get; set; }
+        public string PatientGender { get; set; }
+        public string PatientCi { get; set; }
+        public DateOnly PatientBirthDate { get; set; }
+        public string PatientPhone { get; set; }
+        public string PatientCode { get; set; }
+
+        // Parametros Pregnant
+        public DateOnly? PregnantLastMenstruationDate { get; set; }
+        public DateOnly? PregnantChildBirthDate { get; set; }
+        public string? PregnantDisease { get; set; }
+
+        // Parametros Child (Nullable)
+        public string? ChildParent { get; set; }
+
+        // Parametros InsurancePatient
+        public string? IpTypeInsured { get; set; }
+        public string? IpInsuredRecord { get; set; }
         public int? InsuranceId { get; set; }
-        public string? TypeInsured { get; set; }
+
+        // Parametros Direction
+        public string DirectionCity { get; set; }
+        public string DirectionNeighborhood { get; set; }
+        public string DirectionLatitude { get; set; }
+        public string DirectionLongitude { get; set; }
+        public int DirectionMunicipalityId { get; set; }
+
+        // Parametros Contagion
+        public string ContagionNeighborhood { get; set; }
+        public string ContagionCity { get; set; }
+        public string ContagionMunicipality { get; set; }
+        public string ContagionState { get; set; }
+        public string ContagionCountry { get; set; }
+
+        // Parametros Hospitalized 
+        public DateOnly? HospitalizedEntryDate { get; set; }
+        public short? HospitalizedType { get; set; }
+        public string? HospitalizedName { get; set; }
+
+        // Parametros Hospitalized UTI
+        public DateOnly? UtiEntryDate { get; set; }
+        public short? UtiType { get; set; }
+        public string? UtiName { get; set; }
+
+        // Parametros Dischargehospitalized
+        public string? DischargeType { get; set; }
+        public DateOnly? DischargeDate { get; set; }
+
+        // Parametros File
+        public string FileCode { get; set; }
+        public DateOnly FileSymptomsDate { get; set; }
+        public string FileDiscoveryMethod { get; set; }
+        public string FileEpidemiologicalWeek { get; set; }
+
+        // Parametros Case
+        public string CaseType { get; set; }
+        public string CaseMethod { get; set; }
+        public int CaseDiseaseId { get; set; }
+
+        // Parametros Sample
+        public string? SampleSampleType { get; set; }
+        public DateOnly? SampleCollectionDate { get; set; }
+        public string? SampleObservation { get; set; }
+
+        // Parametros Test
+        public string? TestDiagnosticMethod { get; set; }
+        public string? TestResult { get; set; }
+        public string? TestObservation { get; set; }
+        public int TestLaboratoryId { get; set; }
+
+        // Parametros Varios
+        public int UserId { get; set; }
+        public int[] Symptoms { get; set; }
+        public string[] IsSymptomsPresent { get; set; }
     }
 
 }

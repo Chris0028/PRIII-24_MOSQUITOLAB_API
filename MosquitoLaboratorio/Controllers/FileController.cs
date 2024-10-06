@@ -21,12 +21,12 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("CreateFile")]
-        public async Task<IActionResult> CreateFile([FromBody] CreateFileDTO dTO)
+        public async Task<IActionResult> CreateFile(CreateFileDTO dTO)
         {
             var file = await _fileService.CreateFile(dTO);
             if (file != 0)
             {
-                await _hubContext.Clients.Group(dTO.LaboratoryId.ToString())
+                await _hubContext.Clients.Group(dTO.TestLaboratoryId.ToString())
                                      .SendAsync("ReceiveNotification", "Nueva ficha a la espera de revision");
                 return Ok(file);
             }

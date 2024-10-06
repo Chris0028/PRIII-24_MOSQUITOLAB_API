@@ -16,22 +16,20 @@ namespace MosquitoLaboratorio.Services.File
             var lastFileId = await _fileRepository.GetLastFileId();
             var newFileId = lastFileId + 1;
 
-            var fileCode = $"{"CB"}-{newFileId}";
+            var fileCode = $"CB-{newFileId}";
 
-            var file = new CreateFileDTO
-            {
-                FileCode = fileCode
-            };
+            fileDto.FileCode = fileCode; 
 
-            var total = await _fileRepository.CreateFile(file); 
+            var total = await _fileRepository.CreateFile(fileDto);
 
             if (total != 0)
             {
-                return total; 
+                return total;
             }
 
-            return 0; 
+            return 0;
         }
+
 
         public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
         {
