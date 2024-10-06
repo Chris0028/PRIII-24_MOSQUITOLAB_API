@@ -28,7 +28,7 @@ namespace MosquitoLaboratorio.Controllers
             {
                 await _hubContext.Clients.Group(dTO.TestLaboratoryId.ToString())
                                      .SendAsync("ReceiveNotification", "Nueva ficha a la espera de revision");
-                return Ok(file);
+                return StatusCode(201, file);
             }
             return BadRequest();
         }
