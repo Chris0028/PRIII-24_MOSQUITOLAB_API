@@ -21,20 +21,20 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("CreateFile")]
-        public async Task<IActionResult> CreateFile([FromBody] CreateFileDTO dTO)
+        public async Task<IActionResult> CreateFile(CreateFileDTO dTO)
         {
             var file = await _fileService.CreateFile(dTO);
             if (file != 0)
             {
-                await _hubContext.Clients.Group(dTO.LaboratoryId.ToString())
+                await _hubContext.Clients.Group(dTO.TestLaboratoryId.ToString())
                                      .SendAsync("ReceiveNotification", "Nueva ficha a la espera de revision");
-                return Ok(file);
+                return StatusCode(201, file);
             }
             return BadRequest();
         }
 
         [HttpPost, Route("HistoryFileByHospital")]
-        public async Task<IActionResult> GetHistoryByHospitalId(long hospitalID)
+        public async Task<IActionResult> GetHistoryByHospitalId([FromBody] long hospitalID)
         {
             var files = await _fileService.GetHistoryByHospitalId(hospitalID);
             if (files is not null)
@@ -42,10 +42,10 @@ namespace MosquitoLaboratorio.Controllers
             return BadRequest("No history files found for this Hospital");
         }
 
-        [HttpPost, Route("HistoryFileByLaboratory")]
-        public async Task<IActionResult> GetHistoryByLabId(int laboratoryID)
+        [HttpPost, Route("GetHistoryForLab")]
+        public async Task<IActionResult> GetHistoryForLab([FromBody] int laboratoryID)
         {
-            var files = await _fileService.GetHistoryByLabId(laboratoryID);
+            var files = await _fileService.GetHistoryForLab(laboratoryID);
             if (files is not null)
                 return Ok(files);
             return BadRequest("No history files found for this Laboratory");

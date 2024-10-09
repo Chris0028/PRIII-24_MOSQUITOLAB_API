@@ -10,15 +10,13 @@ public class Doctor
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("names")]
+    [Column("name")]
     [StringLength(50)]
-    [Required]
-    public string Names { get; set; }
+    public string Name { get; set; } 
 
     [Column("lastName")]
     [StringLength(50)]
-    [Required]
-    public string LastName { get; set; }
+    public string LastName { get; set; } 
 
     [Column("secondLastName")]
     [StringLength(50)]
@@ -26,31 +24,35 @@ public class Doctor
 
     [Column("phone")]
     [StringLength(10)]
-    [Required]
-    public string Phone { get; set; }
+    public string Phone { get; set; } 
 
     [Column("email")]
     [StringLength(50)]
-    [Required]
-    public string Email { get; set; }
+    public string Email { get; set; } 
 
-    [Column("hospitalId")]
-    [Required]
-    public int HospitalId { get; set; }
+    [Column("sedes")]
+    [StringLength(20)]
+    public string? Sedes { get; set; }
+
+    [Column("registerDate", TypeName = "timestamp without time zone")]
+    public DateTime RegisterDate { get; set; }
+
+    [Column("lastUpdate", TypeName = "timestamp without time zone")]
+    public DateTime? LastUpdate { get; set; }
 
     [Column("userId")]
-    [Required]
     public int UserId { get; set; }
 
-    [Column("registerDate")]
-    public DateTime Registerdate { get; set; }
+    [Column("hospitalId")]
+    public int HospitalId { get; set; }
 
-    [Column("lastUpdate")]
-    public DateTime? Lastupdate { get; set; }
-
+    [ForeignKey("HospitalId")]
+    [InverseProperty("Doctors")]
     [NotMapped]
     public Hospital? Hospital { get; set; }
 
+    [ForeignKey("UserId")]
+    [InverseProperty("Doctors")]
     [NotMapped]
-    public Entities.User? User { get; set; }
+    public User? User { get; set; }
 }

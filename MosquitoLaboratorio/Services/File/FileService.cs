@@ -12,11 +12,24 @@ namespace MosquitoLaboratorio.Services.File
         public FileService (IFileRepository fileRepository) => _fileRepository = fileRepository;
         public async Task<int> CreateFile(CreateFileDTO fileDto)
         {
+
+            var lastFileId = await _fileRepository.GetLastFileId();
+            var newFileId = lastFileId + 1;
+
+            var fileCode = $"CB-{newFileId}";
+
+            fileDto.FileCode = fileCode; 
+
             var total = await _fileRepository.CreateFile(fileDto);
+
             if (total != 0)
+            {
                 return total;
+            }
+
             return 0;
         }
+
 
         public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
         {
@@ -26,9 +39,9 @@ namespace MosquitoLaboratorio.Services.File
             return null;
         }
 
-        public async Task<List<HistoryFileDTO>> GetHistoryByLabId(int LaboratoryID)
+        public async Task<List<HistoryFileDTO>> GetHistoryForLab(int laboratoryID)
         {
-            var files = await _fileRepository.GetHistoryByLabId(LaboratoryID);
+            var files = await _fileRepository.GetHistoryForLab(laboratoryID);
             if (files is not null)
                 return files;
             return null;

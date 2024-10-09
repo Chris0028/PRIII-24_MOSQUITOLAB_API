@@ -12,13 +12,21 @@ public class Municipality
 
     [Column("name")]
     [StringLength(60)]
-    [Required]
     public string Name { get; set; }
 
     [Column("stateId")]
-    [Required]
     public int StateId { get; set; }
 
+    [InverseProperty("Municipality")]
+    [NotMapped]
+    public List<Direction>? Directions { get; set; }
+
+    [InverseProperty("Municipality")]
+    [NotMapped]
+    public List<Hospital>? Hospitals { get; set; }
+
+    [ForeignKey("StateId")]
+    [InverseProperty("Municipalities")]
     [NotMapped]
     public State? State { get; set; }
 }

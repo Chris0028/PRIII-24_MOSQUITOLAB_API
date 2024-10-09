@@ -10,23 +10,20 @@ public class Pregnant
     [Column("id")]
     public int Id { get; set; }
 
-    [Column("disease")]
-    [StringLength(200)]
-    [Required]
-    public string Disease { get; set; }
-
-    [Column("patientId")]
-    [Required]
-    public long PatientId { get; set; }
-
     [Column("lastMenstruationDate")]
-    [Required]
-    public DateTime LastMenstruationDate { get; set; }
+    public DateOnly LastMenstruationDate { get; set; }
 
     [Column("childBirthDate")]
-    [Required]
-    public DateTime Childbirthdate { get; set; }
+    public DateOnly ChildBirthDate { get; set; }
 
-    [NotMapped]
-    public Patient? Patient { get; set; } 
+    [Column("disease")]
+    [StringLength(200)]
+    public string Disease { get; set; } = null!;
+
+    [Column("patientId")]
+    public long PatientId { get; set; }
+
+    [ForeignKey("PatientId")]
+    [InverseProperty("Pregnants")]
+    public virtual Patient Patient { get; set; } = null!;
 }

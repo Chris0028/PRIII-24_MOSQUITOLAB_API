@@ -12,38 +12,39 @@ public class Employee
 
     [Column("names")]
     [StringLength(60)]
-    [Required]
     public string Names { get; set; }
 
     [Column("lastName")]
     [StringLength(60)]
-    [Required]
-    public string Lastname { get; set; }
+    public string LastName { get; set; }
 
     [Column("secondLastName")]
     [StringLength(60)]
-    public string? Secondlastname { get; set; }
+    public string? SecondLastName { get; set; }
 
     [Column("phone")]
     [StringLength(10)]
-    [Required]
     public string Phone { get; set; }
 
     [Column("userId")]
-    [Required]
     public int UserId { get; set; }
 
     [Column("laboratoryId")]
-    [Required]
     public int LaboratoryId { get; set; }
 
-    public DateTime Registerdate { get; set; }
+    [Column("registerDate", TypeName = "timestamp without time zone")]
+    public DateTime RegisterDate { get; set; }
 
-    public DateTime? Lastupdate { get; set; }
+    [Column("lastUpdate", TypeName = "timestamp without time zone")]
+    public DateTime? LastUpdate { get; set; }
 
+    [ForeignKey("LaboratoryId")]
+    [InverseProperty("Employees")]
     [NotMapped]
     public Laboratory? Laboratory { get; set; }
 
+    [ForeignKey("UserId")]
+    [InverseProperty("Employees")]
     [NotMapped]
-    public Entities.User? User { get; set; }
+    public User? User { get; set; }
 }

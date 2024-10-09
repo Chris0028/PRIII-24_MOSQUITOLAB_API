@@ -12,22 +12,21 @@ public class User
 
     [Column("username")]
     [StringLength(60)]
-    [Required]
     public string Username { get; set; }
 
     [Column("password")]
     [StringLength(60)]
-    [Required]
     public string Password { get; set; }
 
     [Column("role")]
     [StringLength(60)]
-    [Required]
     public string Role { get; set; }
 
+    [InverseProperty("User")]
     [NotMapped]
     public List<Doctor>? Doctors { get; set; }
 
+    [InverseProperty("User")]
     [NotMapped]
     public List<Employee>? Employees { get; set; }
 }

@@ -10,25 +10,25 @@ public class Hospitalized
     [Column("id")]
     public long Id { get; set; }
 
+    [Column("entryDate")]
+    public DateOnly? EntryDate { get; set; }
+
     [Column("type")]
-    [Required]
     public short Type { get; set; }
 
     [Column("hospitalName")]
-    [StringLength(60)]
+    [StringLength(100)]
     public string? HospitalName { get; set; }
 
     [Column("patientId")]
-    [Required]
     public long PatientId { get; set; }
 
-    [Column("entryDate")]
-    [Required]
-    public DateTime Entrydate { get; set; }
-
+    [InverseProperty("Hospitalized")]
     [NotMapped]
-    public List<DischargeHospitalized>? Dischargehospitalizeds { get; set; }
+    public List<Dischargehospitalized>? Dischargehospitalizeds { get; set; }
 
+    [ForeignKey("PatientId")]
+    [InverseProperty("Hospitalizeds")]
     [NotMapped]
     public Patient? Patient { get; set; }
 }

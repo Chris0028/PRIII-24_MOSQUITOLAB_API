@@ -12,15 +12,17 @@ public class Disease
 
     [Column("name")]
     [StringLength(60)]
-    [Required]
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
+    [InverseProperty("Disease")]
     [NotMapped]
-    public List<Case>? Cases { get; set; }
+    public List<Case>? Cases { get; set; } 
 
+    [InverseProperty("Disease")]
     [NotMapped]
-    public List<DiseaseSymptom>? Diseasesymptoms { get; set; }
+    public List<Diseasesymptomfile>? Diseasesymptomfiles { get; set; }
 
+    [InverseProperty("Disease")]
     [NotMapped]
-    public List<Test>? Tests { get; set; }
+    public List<Test>? Tests { get; set; } 
 }

@@ -10,10 +10,6 @@ using MosquitoLaboratorio.Services.Sample;
 using System.Text;
 using MosquitoLaboratorio.Services.File;
 using MosquitoLaboratorio.Services.Hub;
-using MosquitoLaboratorio.Repositories.Location;
-using MosquitoLaboratorio.Services.Location;
-using MosquitoLaboratorio.Repositories.Laboratory;
-using MosquitoLaboratorio.Services.Laboratory;
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -27,13 +23,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<IAuthService,  AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ISampleRepository, SampleRepository>();
 builder.Services.AddScoped<ISampleService, SampleService>();
-builder.Services.AddScoped<ILocationRepository, LocationRepository>();
-builder.Services.AddScoped<ILocationService, LocationService>();
-builder.Services.AddScoped<ILaboratoryRepository, LaboratoryRepository>();
-builder.Services.AddScoped<ILaboratoryService, LaboratoryService>();
+builder.Services.AddScoped<IFileRepository, FileRepository>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 
 builder.Services.AddCors(options =>
@@ -72,9 +66,6 @@ builder.Services.AddAuthentication(opt =>
 });
 
 builder.Services.AddAuthorization();
-
-builder.Services.AddScoped<IFileRepository, FileRepository>();
-builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddSignalR();
 
