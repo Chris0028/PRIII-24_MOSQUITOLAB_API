@@ -19,6 +19,9 @@ namespace MosquitoLaboratorio.Dtos
         [Column("diseasename")]
         public string? DiseaseName { get; set; } = null;
 
+        [Column("diseaseId")]
+        public int? DiseaseId { get; set; }
+
         [Column("samplemanager")]
         public string? SampleManager { get; set; } = null;
 

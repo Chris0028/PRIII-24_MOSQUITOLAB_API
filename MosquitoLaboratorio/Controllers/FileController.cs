@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Services.Auth;
@@ -34,6 +35,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("HistoryFileByHospital")]
+        [Authorize]
         public async Task<IActionResult> GetHistoryByHospitalId([FromBody] long hospitalID)
         {
             var files = await _fileService.GetHistoryByHospitalId(hospitalID);
@@ -43,6 +45,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("GetHistoryForLab")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> GetHistoryForLab([FromBody] int laboratoryID)
         {
             var files = await _fileService.GetHistoryForLab(laboratoryID);

@@ -14,7 +14,7 @@ namespace MosquitoLaboratorio.Repositories.Sample
         public async Task<List<SampleDTO>> GetSamples(SampleDTO? sampleDTO)
         {
             var getSamples = await _context.UfcSampleList
-            .FromSqlInterpolated($"SELECT * FROM ufcsamplelist({sampleDTO?.SampleId ?? null},{sampleDTO?.PatientFullName ?? null},{sampleDTO?.DiseaseName ?? null},{sampleDTO?.RegisterDate ?? null})")
+            .FromSqlInterpolated($"SELECT * FROM ufcsamplelist({sampleDTO?.SampleId ?? null},{sampleDTO?.PatientFullName ?? null},{sampleDTO?.DiseaseId ?? null},{sampleDTO?.RegisterDate ?? null})")
             .ToListAsync();
             return getSamples;
         }
