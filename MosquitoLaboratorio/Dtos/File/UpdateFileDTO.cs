@@ -33,8 +33,8 @@ namespace MosquitoLaboratorio.Dtos.File
         // Parametros Direction
         public string DirectionCity { get; set; }
         public string DirectionNeighborhood { get; set; }
-        public string DirectionLatitude { get; set; } // Mantiene el tipo original como string
-        public string DirectionLongitude { get; set; } // Mantiene el tipo original como string
+        public string DirectionLatitude { get; set; } 
+        public string DirectionLongitude { get; set; } 
         public int DirectionMunicipalityId { get; set; }
 
         // Parametros Contagion
@@ -66,7 +66,7 @@ namespace MosquitoLaboratorio.Dtos.File
         [DataType(DataType.Date)]
         public DateTime FileSymptomsDate { get; set; }
         public string FileDiscoveryMethod { get; set; }
-        public string FileEpidemiologicalWeek { get; set; } // Mantiene el tipo original como string
+        public string FileEpidemiologicalWeek { get; set; }
 
         // Parametros Case
         public string CaseType { get; set; }
@@ -88,7 +88,7 @@ namespace MosquitoLaboratorio.Dtos.File
         // Parametros Varios
         public int UserId { get; set; }
         public int[] Symptoms { get; set; }
-        public string[] IsSymptomsPresent { get; set; } // Mantiene el tipo original como string[]
+        public string[] IsSymptomsPresent { get; set; } 
 
         // Campos adicionales para la función de actualización
         public DateTime LastUpdate { get; set; }
