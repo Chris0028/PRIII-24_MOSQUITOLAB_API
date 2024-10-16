@@ -1,4 +1,6 @@
-﻿namespace MosquitoLaboratorio.Dtos.File
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MosquitoLaboratorio.Dtos.File
 {
     public class UpdateFileDTO
     {
@@ -8,13 +10,16 @@
         public string PatientSecondLastName { get; set; }
         public string PatientGender { get; set; }
         public string PatientCi { get; set; }
-        public DateOnly PatientBirthDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime PatientBirthDate { get; set; }
         public string PatientPhone { get; set; }
         public string PatientCode { get; set; }
 
         // Parametros Pregnant
-        public DateOnly? PregnantLastMenstruationDate { get; set; }
-        public DateOnly? PregnantChildBirthDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? PregnantLastMenstruationDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? PregnantChildBirthDate { get; set; }
         public string? PregnantDisease { get; set; }
 
         // Parametros Child (Nullable)
@@ -40,22 +45,26 @@
         public string ContagionCountry { get; set; }
 
         // Parametros Hospitalized 
-        public DateOnly? HospitalizedEntryDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? HospitalizedEntryDate { get; set; }
         public short? HospitalizedType { get; set; }
         public string? HospitalizedName { get; set; }
 
         // Parametros Hospitalized UTI
-        public DateOnly? UtiEntryDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? UtiEntryDate { get; set; }
         public short? UtiType { get; set; }
         public string? UtiName { get; set; }
 
         // Parametros Dischargehospitalized
         public string? DischargeType { get; set; }
-        public DateOnly? DischargeDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? DischargeDate { get; set; }
 
         // Parametros File
         public string FileCode { get; set; }
-        public DateOnly FileSymptomsDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime FileSymptomsDate { get; set; }
         public string FileDiscoveryMethod { get; set; }
         public string FileEpidemiologicalWeek { get; set; } // Mantiene el tipo original como string
 
@@ -66,7 +75,8 @@
 
         // Parametros Sample
         public string? SampleSampleType { get; set; }
-        public DateOnly? SampleCollectionDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime? SampleCollectionDate { get; set; }
         public string? SampleObservation { get; set; }
 
         // Parametros Test
