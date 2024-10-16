@@ -1,4 +1,5 @@
 ﻿using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Entities;
 using MosquitoLaboratorio.Repositories.Auth;
 using MosquitoLaboratorio.Repositories.File;
@@ -12,7 +13,6 @@ namespace MosquitoLaboratorio.Services.File
         public FileService (IFileRepository fileRepository) => _fileRepository = fileRepository;
         public async Task<int> CreateFile(CreateFileDTO fileDto)
         {
-
             var lastFileId = await _fileRepository.GetLastFileId();
             var newFileId = lastFileId + 1;
 
@@ -45,6 +45,20 @@ namespace MosquitoLaboratorio.Services.File
             if (files is not null)
                 return files;
             return null;
+        }
+
+        public async Task<int> UpdateFile(UpdateFileDTO fileDto)
+        {
+            fileDto.LastUpdate = DateTime.Now;
+
+            var total = await _fileRepository.UpdateFile(fileDto);
+
+            if (total != 0)
+            {
+                return total;
+            }
+
+            return 0;
         }
     }
 }

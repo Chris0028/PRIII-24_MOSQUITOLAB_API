@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Services.Auth;
 using MosquitoLaboratorio.Services.File;
 using MosquitoLaboratorio.Services.Hub;
@@ -29,6 +29,17 @@ namespace MosquitoLaboratorio.Controllers
                 await _hubContext.Clients.Group(dTO.TestLaboratoryId.ToString())
                                      .SendAsync("ReceiveNotification", "Nueva ficha a la espera de revision");
                 return StatusCode(201, file);
+            }
+            return BadRequest();
+        }
+
+        [HttpPatch, Route("UpdateFile")]
+        public async Task<IActionResult> UpdateFile(UpdateFileDTO dTO)
+        {
+            var file = await _fileService.UpdateFile(dTO);
+            if (file != 0)
+            {
+                return StatusCode(200, file);
             }
             return BadRequest();
         }
