@@ -1,8 +1,6 @@
-﻿using System.Text.Json.Serialization;
-
-namespace MosquitoLaboratorio.Dtos
+﻿namespace MosquitoLaboratorio.Dtos.File
 {
-    public class CreateFileDTO
+    public class UpdateFileDTO
     {
         // Parametros Patient
         public string PatientName { get; set; }
@@ -30,8 +28,8 @@ namespace MosquitoLaboratorio.Dtos
         // Parametros Direction
         public string DirectionCity { get; set; }
         public string DirectionNeighborhood { get; set; }
-        public string DirectionLatitude { get; set; }
-        public string DirectionLongitude { get; set; }
+        public string DirectionLatitude { get; set; } // Mantiene el tipo original como string
+        public string DirectionLongitude { get; set; } // Mantiene el tipo original como string
         public int DirectionMunicipalityId { get; set; }
 
         // Parametros Contagion
@@ -59,7 +57,7 @@ namespace MosquitoLaboratorio.Dtos
         public string FileCode { get; set; }
         public DateOnly FileSymptomsDate { get; set; }
         public string FileDiscoveryMethod { get; set; }
-        public string FileEpidemiologicalWeek { get; set; }
+        public string FileEpidemiologicalWeek { get; set; } // Mantiene el tipo original como string
 
         // Parametros Case
         public string CaseType { get; set; }
@@ -80,7 +78,24 @@ namespace MosquitoLaboratorio.Dtos
         // Parametros Varios
         public int UserId { get; set; }
         public int[] Symptoms { get; set; }
-        public string[] IsSymptomsPresent { get; set; }
+        public string[] IsSymptomsPresent { get; set; } // Mantiene el tipo original como string[]
+
+        // Campos adicionales para la función de actualización
+        public DateTime LastUpdate { get; set; }
+        public int PatientId { get; set; }
+        public int? DirectionId { get; set; }
+        public int? IpId { get; set; }
+        public int? PregnantId { get; set; }
+        public int? ChildId { get; set; }
+        public int? ContagionId { get; set; }
+        public int? HospitalizedId { get; set; }
+        public int? UtiId { get; set; }
+        public int? DischargeHospitalizedId { get; set; }
+        public int FileId { get; set; }
+        public int CaseId { get; set; }
+        public int? DiseaseSymptomId { get; set; }
+        public int SampleId { get; set; }
+        public int TestId { get; set; }
     }
 
 }

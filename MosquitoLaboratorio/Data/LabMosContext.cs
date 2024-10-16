@@ -2,6 +2,7 @@
 using MosquitoLaboratorio.Dtos.Auth;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Entities;
+using MosquitoLaboratorio.Dtos.File;
 
 namespace MosquitoLaboratorio.Data;
 
