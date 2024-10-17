@@ -38,6 +38,13 @@ namespace MosquitoLaboratorio.Repositories.File
             return result;
         }
 
+        public async Task<FileDetailsDTO> GetFileDetails(long fileId)
+        {
+            var result = await _context.FileDetailsDTOs
+                .FromSqlInterpolated($@"SELECT * FROM ufc_get_file({fileId})")
+                .FirstOrDefaultAsync();
+            return result;
+        }
 
         public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
         {

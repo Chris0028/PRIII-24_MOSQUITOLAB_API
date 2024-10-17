@@ -11,5 +11,6 @@ namespace MosquitoLaboratorio.Repositories.File
         Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID);
         Task<List<HistoryFileDTO>> GetHistoryForLab(int laboratoryID);
         Task<long> GetLastFileId();
+        Task<FileDetailsDTO> GetFileDetails(long fileId);
     }
 }

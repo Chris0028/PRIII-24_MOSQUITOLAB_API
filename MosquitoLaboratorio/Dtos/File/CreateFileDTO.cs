@@ -91,5 +91,4 @@ namespace MosquitoLaboratorio.Dtos.File
         public int[] Symptoms { get; set; }
         public string[] IsSymptomsPresent { get; set; }
     }
-
 }
