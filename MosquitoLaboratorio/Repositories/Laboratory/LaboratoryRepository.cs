@@ -12,7 +12,7 @@ namespace MosquitoLaboratorio.Repositories.Laboratory
         public async Task<List<Entities.Laboratory>> GetLaboratories()
         {
             var laboratories = await _context.Laboratories.ToListAsync();
-            return laboratories;
+            return laboratories!;
         }
     }
 }
