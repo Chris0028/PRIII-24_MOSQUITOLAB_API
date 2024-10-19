@@ -13,5 +13,15 @@ namespace MosquitoLaboratorio.Mappers
                 Name = target.Name
             };
         }
+
+        public static State ToState(this Entities.State state)
+        {
+            return new State()
+            {
+                Id = state.Id!,
+                Name = state.Name!,
+                Country = state.Country!,
+            };
+        }
     }
 }
