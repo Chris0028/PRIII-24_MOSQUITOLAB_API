@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Services.Auth;
 using MosquitoLaboratorio.Services.File;
 using MosquitoLaboratorio.Services.Hub;
@@ -33,7 +34,19 @@ namespace MosquitoLaboratorio.Controllers
             return BadRequest();
         }
 
+        [HttpPatch, Route("UpdateFile")]
+        public async Task<IActionResult> UpdateFile(UpdateFileDTO dTO)
+        {
+            var file = await _fileService.UpdateFile(dTO);
+            if (file != 0)
+            {
+                return StatusCode(200, file);
+            }
+            return BadRequest();
+        }
+
         [HttpPost, Route("HistoryFileByHospital")]
+        [Authorize]
         public async Task<IActionResult> GetHistoryByHospitalId([FromBody] long hospitalID)
         {
             var files = await _fileService.GetHistoryByHospitalId(hospitalID);
@@ -43,6 +56,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("GetHistoryForLab")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> GetHistoryForLab([FromBody] int laboratoryID)
         {
             var files = await _fileService.GetHistoryForLab(laboratoryID);

@@ -18,7 +18,7 @@ namespace MosquitoLaboratorio.Controllers
             var samples = await _sampleService.GetSamples(sampleDTO);
             if(samples != null)
                 return Ok(samples);
-            return BadRequest();
+            return Ok("Sin registros");
         }
 
         [HttpGet, Route("GetDiseases")]
