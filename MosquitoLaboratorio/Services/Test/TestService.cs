@@ -13,7 +13,6 @@ namespace MosquitoLaboratorio.Services.Test
 
         public async Task<UpdateTestSampleDTO> UpdateTestSample(long fileId, UpdateTestSampleDTO dto)
         {
-            dto.LastUpdate = DateTime.Now;
             var updateTest = await _testRepository.UpdateTestSample(fileId, dto);
             if (updateTest is not null)
                 return updateTest;
