@@ -47,11 +47,11 @@ namespace MosquitoLaboratorio.Services.File
             return null;
         }
 
-        public async Task<int> UpdateFile(UpdateFileDTO fileDto)
+        public async Task<int> UpdateFile(long fileID, UpdateFileDTO fileDto)
         {
             fileDto.LastUpdate = DateTime.Now;
 
-            var total = await _fileRepository.UpdateFile(fileDto);
+            var total = await _fileRepository.UpdateFile(fileID, fileDto);
 
             if (total != 0)
             {

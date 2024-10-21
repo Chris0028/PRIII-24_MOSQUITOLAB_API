@@ -161,7 +161,6 @@ namespace MosquitoLaboratorio.Dtos.File
         public int? HospitalizedId { get; set; }
         public int? UtiId { get; set; }
         public int? DischargeHospitalizedId { get; set; }
-        public int FileId { get; set; }
         public int CaseId { get; set; }
         public int? DiseaseSymptomId { get; set; }
         public int SampleId { get; set; }

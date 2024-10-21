@@ -67,7 +67,7 @@ namespace MosquitoLaboratorio.Repositories.File
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<int> UpdateFile(UpdateFileDTO fileDto)
+        public async Task<int> UpdateFile(long fileID, UpdateFileDTO fileDto)
         {
             var result = await _context.Database.ExecuteSqlInterpolatedAsync($@"
                 SELECT ufc_update_file(
@@ -92,7 +92,7 @@ namespace MosquitoLaboratorio.Repositories.File
                     {fileDto.LastUpdate}::TIMESTAMP, {fileDto.PatientId}, {fileDto.DirectionId}, 
                     {fileDto.IpId}, {fileDto.PregnantId}, {fileDto.ChildId}, 
                     {fileDto.ContagionId}, {fileDto.HospitalizedId}, {fileDto.UtiId}, 
-                    {fileDto.DischargeHospitalizedId}, {fileDto.FileId}, {fileDto.CaseId}, 
+                    {fileDto.DischargeHospitalizedId}, {fileID}, {fileDto.CaseId}, 
                     {fileDto.DiseaseSymptomId}, {fileDto.SampleId}, {fileDto.TestId});");
             return result;
         }
