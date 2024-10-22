@@ -5,6 +5,6 @@ namespace MosquitoLaboratorio.Repositories.Test
 {
     public interface ITestRepository
     {
-        public Task<UpdateTestSampleDTO> UpdateTestSample(long fileId, UpdateTestSampleDTO dto);
+        public Task<UpdateTestSampleDTO> UpdateTestSample(UpdateTestSampleDTO dto);
     }
 }

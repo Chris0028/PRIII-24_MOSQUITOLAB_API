@@ -10,11 +10,11 @@ namespace MosquitoLaboratorio.Repositories.Test
         private readonly LabMosContext _context;
         public TestRepository(LabMosContext context) => _context = context;
 
-        public async Task<UpdateTestSampleDTO> UpdateTestSample(long fileId, UpdateTestSampleDTO dto)
+        public async Task<UpdateTestSampleDTO> UpdateTestSample(UpdateTestSampleDTO dto)
         {
             var result = await _context.UfcTestUpdate.FromSqlInterpolated($@"
                 SELECT * FROM ufc_update_test_sample(
-                    {fileId}::BIGINT,
+                    {dto.FileId},
                     {dto.SampleType}::VARCHAR,
                     {dto.SampleObservation}::TEXT,
                     {dto.TestDiagnosticMethod}::VARCHAR,

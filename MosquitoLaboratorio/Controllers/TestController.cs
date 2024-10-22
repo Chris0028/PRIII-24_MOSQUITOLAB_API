@@ -12,13 +12,13 @@ namespace MosquitoLaboratorio.Controllers
         public TestController(ITestService testService) => _testService = testService;
 
         [HttpPatch, Route("UpdateTestSample")]
-        public async Task<IActionResult> UpdateTestSample(long fileID, [FromBody] UpdateTestSampleDTO dto)
+        public async Task<IActionResult> UpdateTestSample([FromBody] UpdateTestSampleDTO dto)
         {
-            var laboratories = await _testService.UpdateTestSample(fileID, dto);
-            if (laboratories == null)
+            var data = await _testService.UpdateTestSample(dto);
+            if (data == null)
                 return NotFound();
 
-            return Ok(laboratories);
+            return Ok(data);
         }
     }
 }

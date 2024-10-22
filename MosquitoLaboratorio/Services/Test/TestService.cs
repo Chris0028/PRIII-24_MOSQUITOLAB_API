@@ -11,9 +11,9 @@ namespace MosquitoLaboratorio.Services.Test
 
         public TestService(ITestRepository testRepository) => _testRepository = testRepository;
 
-        public async Task<UpdateTestSampleDTO> UpdateTestSample(long fileId, UpdateTestSampleDTO dto)
+        public async Task<UpdateTestSampleDTO> UpdateTestSample(UpdateTestSampleDTO dto)
         {
-            var updateTest = await _testRepository.UpdateTestSample(fileId, dto);
+            var updateTest = await _testRepository.UpdateTestSample(dto);
             if (updateTest is not null)
                 return updateTest;
             return null;
