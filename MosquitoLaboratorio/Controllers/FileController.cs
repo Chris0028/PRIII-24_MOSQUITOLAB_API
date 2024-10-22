@@ -35,9 +35,9 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPatch, Route("UpdateFile")]
-        public async Task<IActionResult> UpdateFile(long fileID, UpdateFileDTO dTO)
+        public async Task<IActionResult> UpdateFile([FromBody] UpdateFileDTO dTO)
         {
-            var file = await _fileService.UpdateFile(fileID, dTO);
+            var file = await _fileService.UpdateFile(dTO);
             if (file != 0)
             {
                 return StatusCode(200, file);
