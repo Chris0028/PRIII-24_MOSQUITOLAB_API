@@ -13,6 +13,9 @@ namespace MosquitoLaboratorio.Dtos.Auth
         [Column("role")]
         public string Role { get; set; }
 
+        [Column("password")]
+        public string Password { get; set; }
+
         [Column("extra_info")]
         public string? Info { get; set; }
 

@@ -5,7 +5,9 @@ using MosquitoLaboratorio.Services.Test;
 
 namespace MosquitoLaboratorio.Controllers
 {
-    public class TestController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TestController : ControllerBase
     {
         private readonly ITestService _testService;
 
