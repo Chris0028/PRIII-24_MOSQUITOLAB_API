@@ -14,10 +14,8 @@ using MosquitoLaboratorio.Repositories.Location;
 using MosquitoLaboratorio.Services.Location;
 using MosquitoLaboratorio.Repositories.Laboratory;
 using MosquitoLaboratorio.Services.Laboratory;
-using MosquitoLaboratorio.Repositories.Hospital;
-using MosquitoLaboratorio.Services.Hospital;
-using MosquitoLaboratorio.Repositories.Insurance;
-using MosquitoLaboratorio.Services.Insurance;
+using MosquitoLaboratorio.Repositories.Test;
+using MosquitoLaboratorio.Services.Test;
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -30,23 +28,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Instanciacion de Repositorios
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<ISampleRepository, SampleRepository>();
-builder.Services.AddScoped<IFileRepository, FileRepository>();
-builder.Services.AddScoped<ILocationRepository, LocationRepository>();
-builder.Services.AddScoped<ILaboratoryRepository, LaboratoryRepository>();
-builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
-builder.Services.AddScoped<IInsuranceRepository, InsuranceRepository>();
-
-//Instanciacion de Servicios
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ISampleRepository, SampleRepository>();
 builder.Services.AddScoped<ISampleService, SampleService>();
+builder.Services.AddScoped<IFileRepository, FileRepository>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
+builder.Services.AddScoped<ILaboratoryRepository, LaboratoryRepository>();
 builder.Services.AddScoped<ILaboratoryService, LaboratoryService>();
-builder.Services.AddScoped<IHospitalService, HospitalService>();
-builder.Services.AddScoped<IInsuranceService, InsuranceService>();
+builder.Services.AddScoped<ITestRepository, TestRepository>();
+builder.Services.AddScoped<ITestService, TestService>();
 
 builder.Services.AddCors(options =>
 {

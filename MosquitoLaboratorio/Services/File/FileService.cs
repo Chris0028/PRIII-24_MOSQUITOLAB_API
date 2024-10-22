@@ -49,7 +49,6 @@ namespace MosquitoLaboratorio.Services.File
 
         public async Task<int> UpdateFile(UpdateFileDTO fileDto)
         {
-            fileDto.LastUpdate = DateTime.Now;
 
             var total = await _fileRepository.UpdateFile(fileDto);
 

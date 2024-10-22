@@ -3,6 +3,7 @@ using MosquitoLaboratorio.Dtos.Auth;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Entities;
 using MosquitoLaboratorio.Dtos.File;
+using MosquitoLaboratorio.Dtos.Test;
 
 namespace MosquitoLaboratorio.Data;
 
@@ -67,6 +68,7 @@ public class LabMosContext : DbContext
     public DbSet<HistoryFileDTO> HistoryFileResults { get; set; }
     public DbSet<SampleDTO> UfcSampleList { get; set; }
     public DbSet<AuthUserDTO> UfcUserAuth { get; set; }
+    public DbSet<UpdateTestSampleDTO> UfcTestUpdate { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -75,6 +77,7 @@ public class LabMosContext : DbContext
         modelBuilder.Entity<HistoryFileDTO>().HasNoKey();
         modelBuilder.Entity<SampleDTO>().HasNoKey();
         modelBuilder.Entity<AuthUserDTO>().HasNoKey();
+        modelBuilder.Entity<UpdateTestSampleDTO>().HasNoKey();
         base.OnModelCreating(modelBuilder);   
     }
 }

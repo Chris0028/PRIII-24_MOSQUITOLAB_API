@@ -6,10 +6,10 @@ namespace MosquitoLaboratorio.Repositories.File
 {
     public interface IFileRepository
     {
-        Task<int> CreateFile(CreateFileDTO fileDto);
-        Task<int> UpdateFile(UpdateFileDTO fileDto);
-        Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID);
-        Task<List<HistoryFileDTO>> GetHistoryForLab(int laboratoryID);
-        Task<long> GetLastFileId();
+        public Task<int> CreateFile(CreateFileDTO fileDto);
+        public Task<int> UpdateFile(UpdateFileDTO fileDto);
+        public Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID);
+        public Task<List<HistoryFileDTO>> GetHistoryForLab(int laboratoryID);
+        public Task<long> GetLastFileId();
     }
 }

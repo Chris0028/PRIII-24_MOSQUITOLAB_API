@@ -70,31 +70,35 @@ namespace MosquitoLaboratorio.Repositories.File
         public async Task<int> UpdateFile(UpdateFileDTO fileDto)
         {
             var result = await _context.Database.ExecuteSqlInterpolatedAsync($@"
-                SELECT ufc_update_file(
-                    {fileDto.PatientName}::VARCHAR, {fileDto.PatientLastName}::VARCHAR, {fileDto.PatientSecondLastName}::VARCHAR, 
-                    {fileDto.PatientGender}::CHAR, {fileDto.PatientCi}::VARCHAR, {fileDto.PatientBirthDate}::DATE,
-                    {fileDto.PatientPhone}::VARCHAR, {fileDto.PatientCode}::VARCHAR,
-                    {fileDto.PregnantLastMenstruationDate}::DATE, {fileDto.PregnantChildBirthDate}::DATE, {fileDto.PregnantDisease}::VARCHAR,
-                    {fileDto.ChildParent}::VARCHAR, {fileDto.IpTypeInsured}::VARCHAR, {fileDto.IpInsuredRecord}::VARCHAR, {fileDto.InsuranceId},
-                    {fileDto.DirectionCity}::VARCHAR, {fileDto.DirectionNeighborhood}::VARCHAR, {fileDto.DirectionLatitude}::VARCHAR,
-                    {fileDto.DirectionLongitude}::VARCHAR, {fileDto.DirectionMunicipalityId},
-                    {fileDto.ContagionNeighborhood}::VARCHAR, {fileDto.ContagionCity}::VARCHAR, {fileDto.ContagionMunicipality}::VARCHAR,
-                    {fileDto.ContagionState}::VARCHAR, {fileDto.ContagionCountry}::VARCHAR,
-                    {fileDto.HospitalizedEntryDate}::DATE, {fileDto.HospitalizedType}, {fileDto.HospitalizedName}::VARCHAR,
-                    {fileDto.UtiEntryDate}::DATE, {fileDto.UtiType}, {fileDto.UtiName}::VARCHAR,
-                    {fileDto.DischargeType}::VARCHAR, {fileDto.DischargeDate}::DATE,
-                    {fileDto.FileCode}::VARCHAR, {fileDto.FileSymptomsDate}::DATE, {fileDto.FileDiscoveryMethod}::VARCHAR,
-                    {fileDto.FileEpidemiologicalWeek}::VARCHAR, {fileDto.CaseType}::VARCHAR, {fileDto.CaseMethod}::VARCHAR,
-                    {fileDto.CaseDiseaseId}, {fileDto.SampleSampleType}::VARCHAR, {fileDto.SampleCollectionDate}::DATE,
-                    {fileDto.SampleObservation}::TEXT, {fileDto.TestDiagnosticMethod}::VARCHAR, {fileDto.TestResult}::VARCHAR,
-                    {fileDto.TestObservation}::VARCHAR, {fileDto.TestLaboratoryId}, {fileDto.UserId},
-                    {fileDto.Symptoms}, {fileDto.IsSymptomsPresent},
-                    {fileDto.LastUpdate}::TIMESTAMP, {fileDto.PatientId}, {fileDto.DirectionId}, 
-                    {fileDto.IpId}, {fileDto.PregnantId}, {fileDto.ChildId}, 
-                    {fileDto.ContagionId}, {fileDto.HospitalizedId}, {fileDto.UtiId}, 
-                    {fileDto.DischargeHospitalizedId}, {fileDto.FileId}, {fileDto.CaseId}, 
-                    {fileDto.DiseaseSymptomId}, {fileDto.SampleId}, {fileDto.TestId});");
+            SELECT ufc_update_file(
+                {fileDto.PatientName}::VARCHAR, {fileDto.PatientLastName}::VARCHAR, {fileDto.PatientSecondLastName}::VARCHAR,
+                {fileDto.PatientGender}::CHAR, {fileDto.PatientCI}::VARCHAR, {fileDto.PatientBirthDate}::DATE,
+                {fileDto.PatientPhone}::VARCHAR, {fileDto.PatientCode}::VARCHAR,
+                {fileDto.PregnantLastMenstruationDate}::DATE, {fileDto.PregnantChildBirthDate}::DATE, {fileDto.PregnantDisease}::VARCHAR,
+                {fileDto.ChildParent}::VARCHAR,
+                {fileDto.IpTypeInsured}::VARCHAR, {fileDto.IpInsuredRecord}::VARCHAR, {fileDto.InsuranceId},
+                {fileDto.DirectionCity}::VARCHAR, {fileDto.DirectionNeighborhood}::VARCHAR, {fileDto.DirectionLatitude}::VARCHAR,
+                {fileDto.DirectionLongitude}::VARCHAR, {fileDto.DirectionMunicipalityId},
+                {fileDto.ContagionNeighborhood}::VARCHAR, {fileDto.ContagionCity}::VARCHAR, {fileDto.ContagionMunicipality}::VARCHAR,
+                {fileDto.ContagionState}::VARCHAR, {fileDto.ContagionCountry}::VARCHAR,
+                {fileDto.HospitalizedEntryDate}::DATE, {fileDto.HospitalizedType}, {fileDto.HospitalizedName}::VARCHAR,
+                {fileDto.UtiEntryDate}::DATE, {fileDto.UtiType}, {fileDto.UtiName}::VARCHAR,
+                {fileDto.DischargeType}::VARCHAR, {fileDto.DischargeDate}::DATE,
+                {fileDto.FileCode}::VARCHAR, {fileDto.FileSymptomsDate}::DATE, {fileDto.FileDiscoveryMethod}::VARCHAR,
+                {fileDto.FileEpideWeek}::VARCHAR,
+                {fileDto.CaseType}::VARCHAR, {fileDto.CaseMethod}::VARCHAR, {fileDto.CaseDiseaseId},
+                {fileDto.SampleType}::VARCHAR, {fileDto.SampleCollectionDate}::DATE, {fileDto.SampleObservation}::TEXT,
+                {fileDto.TestDiagnosticMethod}::VARCHAR, {fileDto.TestResult}::VARCHAR, {fileDto.TestObservation}::VARCHAR,
+                {fileDto.TestLaboratoryId},
+                {fileDto.UserId},{fileDto.Symptoms}, {fileDto.IsSymptomsPresent},
+                {fileDto.PatientId}, {fileDto.DirectionId}, {fileDto.IpId}, {fileDto.PregnantId}, {fileDto.ChildId},
+                {fileDto.ContagionId}, {fileDto.HospitalizedId}, {fileDto.UtiId}, {fileDto.DischargeId}, {fileDto.FileId},
+                {fileDto.CaseId}, {fileDto.DiseasesymptomfileId}, {fileDto.SampleId}, {fileDto.TestId});"
+                );
+
             return result;
         }
+
+
     }
 }
