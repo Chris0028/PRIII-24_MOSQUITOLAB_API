@@ -20,7 +20,9 @@ namespace MosquitoLaboratorio.Repositories.Test
                     {dto.TestDiagnosticMethod}::VARCHAR,
                     {dto.TestResult}::VARCHAR,
                     {dto.TestObservation}::TEXT,
-                    {dto.LastUpdateUserId}::INTEGER
+                    {dto.LastUpdateUserId}::INTEGER,
+                    {dto.CaseType}::VARCHAR,
+                    {dto.CaseMethod}::VARCHAR
                 )").FirstOrDefaultAsync();
 
             return result!;
