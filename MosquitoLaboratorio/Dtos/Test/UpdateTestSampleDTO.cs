@@ -21,5 +21,11 @@ namespace MosquitoLaboratorio.Dtos.Test
         public string? TestObservation { get; set; }
         [Column("last_update_user_id")]
         public int LastUpdateUserId { get; set; }
+
+        // Case
+        [Column("case_type")]
+        public string CaseType { get; set; }
+        [Column("case_method")]
+        public string CaseMethod { get; set; }
     }
 }
