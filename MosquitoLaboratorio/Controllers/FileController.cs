@@ -67,7 +67,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("GetFileDetails")]
-        
+
         public async Task<IActionResult> GetFileDetails([FromBody] long fileID)
         {
             var files = await _fileService.GetFileDetails(fileID);

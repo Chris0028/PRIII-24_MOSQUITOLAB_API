@@ -148,8 +148,8 @@ public class FileDetailsDTO
     [Column("hospitalized_type")]
     public short? HospitalizedType { get; set; }
 
-    [Column("hospital_name")]
-    public string? HospitalName { get; set; }
+    [Column("hospitalized_hospital_name")]
+    public string? HospitalizedHospitalName { get; set; }
 
     // Campos de la tabla dischargeHospitalized
     [Column("discharge_id")]
@@ -209,4 +209,25 @@ public class FileDetailsDTO
 
     [Column("test_observation")]
     public string? TestObservation { get; set; }
+
+    //Campos de la tabla hospital
+
+    [Column("hospital_name")]
+    public string? HospitalName { get; set; }
+
+    [Column("hospital_typehospital")]
+    public short? TypeHospital { get; set; }
+
+    [Column("hospital_contact")]
+    public string? HospitalContact { get; set; }
+
+    [Column("hospital_network")]
+    public string? HospitalNetwork { get; set; }
+
+    [Column("municipality_name")]
+    public string? MunicipalityName { get; set; }
+
+    [Column("state_name")]
+    public string? StateName { get; set; }
+
 }
