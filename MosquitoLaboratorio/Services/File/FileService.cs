@@ -37,6 +37,10 @@ namespace MosquitoLaboratorio.Services.File
                 return files;
             return null;
         }
+        public async Task<List<HistoryFileDTO>> GetAllHistory()
+        {
+            return await _fileRepository.GetAllHistory();
+        }
 
         public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
         {
@@ -46,9 +50,9 @@ namespace MosquitoLaboratorio.Services.File
             return null;
         }
 
-        public async Task<List<HistoryFileDTO>> GetHistoryForLab(int laboratoryID)
+        public async Task<List<HistoryFileDTO>> GetHistoryByLabId(int laboratoryID)
         {
-            var files = await _fileRepository.GetHistoryForLab(laboratoryID);
+            var files = await _fileRepository.GetHistoryByLabId(laboratoryID);
             if (files is not null)
                 return files;
             return null;
@@ -56,7 +60,6 @@ namespace MosquitoLaboratorio.Services.File
 
         public async Task<int> UpdateFile(UpdateFileDTO fileDto)
         {
-            fileDto.LastUpdate = DateTime.Now;
 
             var total = await _fileRepository.UpdateFile(fileDto);
 

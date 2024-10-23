@@ -1,171 +1,104 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MosquitoLaboratorio.Dtos.File
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-
     public class UpdateFileDTO
     {
-        // Parametros Patient
+        // Patient properties
         public string PatientName { get; set; }
         public string PatientLastName { get; set; }
         public string PatientSecondLastName { get; set; }
-        public string PatientGender { get; set; }
-        public string PatientCi { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime PatientBirthDate
-        {
-            get => _patientBirthDate;
-            set => _patientBirthDate = DateTime.SpecifyKind(value, DateTimeKind.Utc);
-        }
-        private DateTime _patientBirthDate;
-
+        public char PatientGender { get; set; }
+        public string PatientCI { get; set; }
+        public DateTime PatientBirthDate { get; set; }
         public string PatientPhone { get; set; }
         public string PatientCode { get; set; }
 
-        // Parametros Pregnant
-        [DataType(DataType.Date)]
-        public DateTime? PregnantLastMenstruationDate
-        {
-            get => _pregnantLastMenstruationDate;
-            set => _pregnantLastMenstruationDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : (DateTime?)null;
-        }
-        private DateTime? _pregnantLastMenstruationDate;
-
-        [DataType(DataType.Date)]
-        public DateTime? PregnantChildBirthDate
-        {
-            get => _pregnantChildBirthDate;
-            set => _pregnantChildBirthDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : (DateTime?)null;
-        }
-        private DateTime? _pregnantChildBirthDate;
-
+        // Pregnant properties
+        public DateTime? PregnantLastMenstruationDate { get; set; }
+        public DateTime? PregnantChildBirthDate { get; set; }
         public string? PregnantDisease { get; set; }
 
-        // Parametros Child (Nullable)
+        // Child properties
         public string? ChildParent { get; set; }
 
-        // Parametros InsurancePatient
-        public string? IpTypeInsured { get; set; }
-        public string? IpInsuredRecord { get; set; }
+        // InsurancePatient properties
+        public string IpTypeInsured { get; set; }
+        public string IpInsuredRecord { get; set; }
         public int? InsuranceId { get; set; }
 
-        // Parametros Direction
+        // Direction properties
         public string DirectionCity { get; set; }
         public string DirectionNeighborhood { get; set; }
         public string DirectionLatitude { get; set; }
         public string DirectionLongitude { get; set; }
-        public int DirectionMunicipalityId { get; set; }
+        public int? DirectionMunicipalityId { get; set; }
 
-        // Parametros Contagion
+        // Contagion properties
         public string ContagionNeighborhood { get; set; }
         public string ContagionCity { get; set; }
         public string ContagionMunicipality { get; set; }
         public string ContagionState { get; set; }
         public string ContagionCountry { get; set; }
 
-        // Parametros Hospitalized
-        [DataType(DataType.Date)]
-        public DateTime? HospitalizedEntryDate
-        {
-            get => _hospitalizedEntryDate;
-            set => _hospitalizedEntryDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : (DateTime?)null;
-        }
-        private DateTime? _hospitalizedEntryDate;
-
+        // Hospitalized properties
+        public DateTime? HospitalizedEntryDate { get; set; }
         public short? HospitalizedType { get; set; }
-        public string? HospitalizedName { get; set; }
+        public string HospitalizedName { get; set; }
 
-        // Parametros Hospitalized UTI
-        [DataType(DataType.Date)]
-        public DateTime? UtiEntryDate
-        {
-            get => _utiEntryDate;
-            set => _utiEntryDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : (DateTime?)null;
-        }
-        private DateTime? _utiEntryDate;
-
+        // Hospitalized UTI properties
+        public DateTime? UtiEntryDate { get; set; }
         public short? UtiType { get; set; }
         public string? UtiName { get; set; }
 
-        // Parametros Dischargehospitalized
-        public string? DischargeType { get; set; }
+        // DischargeHospitalized properties
+        public string DischargeType { get; set; }
+        public DateTime? DischargeDate { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime? DischargeDate
-        {
-            get => _dischargeDate;
-            set => _dischargeDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : (DateTime?)null;
-        }
-        private DateTime? _dischargeDate;
-
-        // Parametros File
+        // File properties
         public string FileCode { get; set; }
-
-        [DataType(DataType.Date)]
-        public DateTime FileSymptomsDate
-        {
-            get => _fileSymptomsDate;
-            set => _fileSymptomsDate = DateTime.SpecifyKind(value, DateTimeKind.Utc);
-        }
-        private DateTime _fileSymptomsDate;
-
+        public DateTime? FileSymptomsDate { get; set; }
         public string FileDiscoveryMethod { get; set; }
-        public string FileEpidemiologicalWeek { get; set; }
+        public string FileEpideWeek { get; set; }
 
-        // Parametros Case
+        // Case properties
         public string CaseType { get; set; }
         public string CaseMethod { get; set; }
-        public int CaseDiseaseId { get; set; }
+        public int? CaseDiseaseId { get; set; }
 
-        // Parametros Sample
-        public string? SampleSampleType { get; set; }
+        // Sample properties
+        public string SampleType { get; set; }
+        public DateTime? SampleCollectionDate { get; set; }
+        public string SampleObservation { get; set; }
 
-        [DataType(DataType.Date)]
-        public DateTime? SampleCollectionDate
-        {
-            get => _sampleCollectionDate;
-            set => _sampleCollectionDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : (DateTime?)null;
-        }
-        private DateTime? _sampleCollectionDate;
+        // Test properties
+        public string TestDiagnosticMethod { get; set; }
+        public string TestResult { get; set; }
+        public string TestObservation { get; set; }
+        public int? TestLaboratoryId { get; set; }
 
-        public string? SampleObservation { get; set; }
-
-        // Parametros Test
-        public string? TestDiagnosticMethod { get; set; }
-        public string? TestResult { get; set; }
-        public string? TestObservation { get; set; }
-        public int TestLaboratoryId { get; set; }
-
-        // Parametros Varios
+        // Various properties
         public int UserId { get; set; }
-        public int[] Symptoms { get; set; }
-        public string[] IsSymptomsPresent { get; set; }
+        public List<int> Symptoms { get; set; }
+        public List<string> IsSymptomsPresent { get; set; }
 
-        // Campos adicionales para la función de actualización
-        public DateTime LastUpdate
-        {
-            get => _lastUpdate;
-            set => _lastUpdate = DateTime.SpecifyKind(value, DateTimeKind.Utc);
-        }
-        private DateTime _lastUpdate;
-
-        public int PatientId { get; set; }
-        public int? DirectionId { get; set; }
+        // ID Parameters for Update
+        public long PatientId { get; set; }
+        public int DirectionId { get; set; }
         public int? IpId { get; set; }
         public int? PregnantId { get; set; }
         public int? ChildId { get; set; }
-        public int? ContagionId { get; set; }
-        public int? HospitalizedId { get; set; }
-        public int? UtiId { get; set; }
-        public int? DischargeHospitalizedId { get; set; }
-        public int FileId { get; set; }
+        public int ContagionId { get; set; }
+        public long? HospitalizedId { get; set; }
+        public long? UtiId { get; set; }
+        public int DischargeId { get; set; }
+        public long FileId { get; set; }
         public int CaseId { get; set; }
-        public int? DiseaseSymptomId { get; set; }
+        public int DiseasesymptomfileId { get; set; }
         public int SampleId { get; set; }
         public int TestId { get; set; }
     }
+
 
 }

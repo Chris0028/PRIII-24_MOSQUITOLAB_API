@@ -36,7 +36,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPatch, Route("UpdateFile")]
-        public async Task<IActionResult> UpdateFile(UpdateFileDTO dTO)
+        public async Task<IActionResult> UpdateFile([FromBody] UpdateFileDTO dTO)
         {
             var file = await _fileService.UpdateFile(dTO);
             if (file != 0)
@@ -48,22 +48,34 @@ namespace MosquitoLaboratorio.Controllers
 
         [HttpPost, Route("HistoryFileByHospital")]
         [Authorize]
-        public async Task<IActionResult> GetHistoryByHospitalId([FromBody] long hospitalID)
+        public async Task<IActionResult> GetHistoryByHospitalId([FromBody] long? hospitalID)
         {
-            var files = await _fileService.GetHistoryByHospitalId(hospitalID);
-            if (files is not null)
+            if (hospitalID.HasValue)
+            {
+                var files = await _fileService.GetHistoryByHospitalId(hospitalID!.Value);
                 return Ok(files);
-            return BadRequest("No history files found for this Hospital");
+            }
+            else
+            {
+                var files = await _fileService.GetAllHistory();
+                return Ok(files);
+            }
         }
 
         [HttpPost, Route("GetHistoryForLab")]
         [Authorize(Roles = "Admin,Employee")]
-        public async Task<IActionResult> GetHistoryForLab([FromBody] int laboratoryID)
+        public async Task<IActionResult> GetHistoryForLab([FromBody] int? laboratoryID)
         {
-            var files = await _fileService.GetHistoryForLab(laboratoryID);
-            if (files is not null)
+            if(laboratoryID.HasValue)
+            {
+                var files = await _fileService.GetHistoryByLabId(laboratoryID.Value);
                 return Ok(files);
-            return BadRequest("No history files found for this Laboratory");
+            }
+            else
+            {
+                var files = await _fileService.GetAllHistory();
+                return Ok(files);
+            }
         }
 
         [HttpPost, Route("GetFileDetails")]

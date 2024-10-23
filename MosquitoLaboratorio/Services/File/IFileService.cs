@@ -8,7 +8,9 @@ namespace MosquitoLaboratorio.Services.File
         Task<int> CreateFile(CreateFileDTO fileDto);
         Task<int> UpdateFile(UpdateFileDTO fileDto);
         Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID);
-        Task<List<HistoryFileDTO>> GetHistoryForLab(int laboratoryID);
+        Task<List<HistoryFileDTO>> GetHistoryByLabId(int laboratoryID);
+        Task<List<HistoryFileDTO>> GetAllHistory();
+
         Task<FileDetailsDTO> GetFileDetails(long fileId);
     }
 }
