@@ -17,6 +17,7 @@ namespace MosquitoLaboratorio.Services.File
             var fileCode = $"CB-{newFileId}";
 
             fileDto.FileCode = fileCode; 
+            fileDto.SampleCollectionDate = DateTime.UtcNow;
 
             var total = await _fileRepository.CreateFile(fileDto);
 
