@@ -68,6 +68,9 @@ public class LabMosContext : DbContext
     public DbSet<HistoryFileDTO> HistoryFileResults { get; set; }
     public DbSet<SampleDTO> UfcSampleList { get; set; }
     public DbSet<AuthUserDTO> UfcUserAuth { get; set; }
+    public DbSet<FileDetailsDTO> FileDetailsDTOs { get; set; }
+
+
     public DbSet<UpdateTestSampleDTO> UfcTestUpdate { get; set; }
     #endregion
 
@@ -78,6 +81,7 @@ public class LabMosContext : DbContext
         modelBuilder.Entity<SampleDTO>().HasNoKey();
         modelBuilder.Entity<AuthUserDTO>().HasNoKey();
         modelBuilder.Entity<UpdateTestSampleDTO>().HasNoKey();
+        modelBuilder.Entity<FileDetailsDTO>().HasNoKey();
         base.OnModelCreating(modelBuilder);   
     }
 }

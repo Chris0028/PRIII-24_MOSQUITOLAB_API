@@ -1,5 +1,7 @@
 ﻿using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.File;
+using MosquitoLaboratorio.Entities;
+using MosquitoLaboratorio.Repositories.Auth;
 using MosquitoLaboratorio.Repositories.File;
 
 namespace MosquitoLaboratorio.Services.File
@@ -28,6 +30,13 @@ namespace MosquitoLaboratorio.Services.File
             return 0;
         }
 
+        public async Task<FileDetailsDTO> GetFileDetails(long fileId)
+        {
+            var files = await _fileRepository.GetFileDetails(fileId);
+            if (files is not null)
+                return files;
+            return null;
+        }
         public async Task<List<HistoryFileDTO>> GetAllHistory()
         {
             return await _fileRepository.GetAllHistory();

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using MosquitoLaboratorio.Dtos.File;
+using MosquitoLaboratorio.Entities;
 using MosquitoLaboratorio.Services.Auth;
 using MosquitoLaboratorio.Services.File;
 using MosquitoLaboratorio.Services.Hub;
@@ -75,6 +76,16 @@ namespace MosquitoLaboratorio.Controllers
                 var files = await _fileService.GetAllHistory();
                 return Ok(files);
             }
+        }
+
+        [HttpPost, Route("GetFileDetails")]
+
+        public async Task<IActionResult> GetFileDetails([FromBody] long fileID)
+        {
+            var files = await _fileService.GetFileDetails(fileID);
+            if (files is not null)
+                return Ok(files);
+            return BadRequest("Not data found");
         }
     }
 }

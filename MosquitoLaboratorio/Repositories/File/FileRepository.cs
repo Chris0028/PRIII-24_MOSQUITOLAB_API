@@ -2,6 +2,7 @@
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.File;
+using MosquitoLaboratorio.Entities;
 using Npgsql;
 
 namespace MosquitoLaboratorio.Repositories.File
@@ -41,6 +42,13 @@ namespace MosquitoLaboratorio.Repositories.File
         {
             var results = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufcHistoryFileDoctor()").ToListAsync();
             return results;
+        }
+        public async Task<FileDetailsDTO> GetFileDetails(long fileId)
+        {
+            var result = await _context.FileDetailsDTOs
+                .FromSqlInterpolated($@"SELECT * FROM ufc_get_file({fileId})")
+                .FirstOrDefaultAsync();
+            return result;
         }
 
         public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
