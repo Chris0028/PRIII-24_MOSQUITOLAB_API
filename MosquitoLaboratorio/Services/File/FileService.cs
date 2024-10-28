@@ -49,6 +49,14 @@ namespace MosquitoLaboratorio.Services.File
             return null;
         }
 
+        public async Task<List<ReportFileDTO>> GetReportFileList(ReportFileParametersDTO dto)
+        {
+            var reports = await _fileRepository.GetReportFileList(dto);
+            if (reports is not null)
+                return reports;
+            return null;
+        }
+
         public async Task<int> UpdateFile(UpdateFileDTO fileDto)
         {
 

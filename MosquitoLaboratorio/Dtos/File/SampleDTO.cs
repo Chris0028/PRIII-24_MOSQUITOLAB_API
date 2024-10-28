@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MosquitoLaboratorio.Dtos
+namespace MosquitoLaboratorio.Dtos.File
 {
     public class SampleDTO
     {

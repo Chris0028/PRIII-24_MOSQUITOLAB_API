@@ -71,6 +71,19 @@ namespace MosquitoLaboratorio.Repositories.File
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<List<ReportFileDTO>> GetReportFileList(ReportFileParametersDTO dto)
+        {
+            var result = await _context.UfcReportFile.FromSqlInterpolated($@"
+                SELECT * FROM ufc_reports_file(
+                    {dto.LaboratoryId}::INTEGER, {dto.SymptomsDateFrom}::DATE, {dto.SymptomsDateTo}::DATE,
+                    {dto.NotificationDateFrom}::DATE, {dto.NotificationDateTo}::DATE, {dto.ResultDateFrom}::DATE,
+                    {dto.ResultDateTo}::DATE,{dto.CaseStatus}::SMALLINT,{dto.DiagnosticMethod}::VARCHAR,{dto.Department}::VARCHAR,
+                    {dto.HealthNetwork}::VARCHAR,{dto.Municipality}::VARCHAR,{dto.Establishment}::VARCHAR,
+                    {dto.Subsector}::VARCHAR)").ToListAsync();
+
+            return result;
+        }
+
         public async Task<int> UpdateFile(UpdateFileDTO fileDto)
         {
             var result = await _context.Database.ExecuteSqlInterpolatedAsync($@"

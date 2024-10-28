@@ -1,4 +1,5 @@
 ﻿using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Dtos.File;
 
 namespace MosquitoLaboratorio.Services.Sample
 {
