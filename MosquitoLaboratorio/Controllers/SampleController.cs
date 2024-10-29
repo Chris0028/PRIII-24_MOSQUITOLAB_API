@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Services.Sample;
 
 namespace MosquitoLaboratorio.Controllers

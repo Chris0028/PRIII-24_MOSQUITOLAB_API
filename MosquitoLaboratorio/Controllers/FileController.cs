@@ -77,5 +77,15 @@ namespace MosquitoLaboratorio.Controllers
                 return Ok(files);
             }
         }
+        [HttpPost, Route("GetReportsList")]
+        public async Task<IActionResult> GetReportFileList([FromBody] ReportFileParametersDTO dto)
+        {
+            var reports = await _fileService.GetReportFileList(dto);
+            if (reports is not null)
+            {
+                return Ok(reports);
+            }
+            return NoContent();
+        }
     }
 }
