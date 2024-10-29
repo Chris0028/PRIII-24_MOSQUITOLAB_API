@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Services.Auth;
 using MosquitoLaboratorio.Services.File;

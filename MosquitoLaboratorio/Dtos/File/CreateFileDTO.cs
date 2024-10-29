@@ -122,22 +122,22 @@ namespace MosquitoLaboratorio.Dtos.File
         public int CaseDiseaseId { get; set; }
 
         // Parametros Sample
-        public string? SampleSampleType { get; set; }
+        public string SampleSampleType { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime? SampleCollectionDate
-        {
-            get => _sampleCollectionDate;
-            set => _sampleCollectionDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : (DateTime?)null;
-        }
-        private DateTime? _sampleCollectionDate;
+        public DateTime SampleCollectionDate { get; set; }
+        //{
+        //    get => _sampleCollectionDate;
+        //    set => _sampleCollectionDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc);
+        //}
+        //private DateTime _sampleCollectionDate;
 
-        public string? SampleObservation { get; set; }
+        public string SampleObservation { get; set; }
 
         // Parametros Test
-        public string? TestDiagnosticMethod { get; set; }
-        public string? TestResult { get; set; }
-        public string? TestObservation { get; set; }
+        public string TestDiagnosticMethod { get; set; }
+        public string TestResult { get; set; }
+        public string TestObservation { get; set; }
         public int TestLaboratoryId { get; set; }
 
         // Parametros Varios

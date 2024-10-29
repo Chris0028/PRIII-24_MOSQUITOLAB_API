@@ -71,6 +71,30 @@ namespace MosquitoLaboratorio.Repositories.File
                 .FirstOrDefaultAsync();
         }
 
+
+
+
+        public async Task<bool> PatientCodeExists(string patientCode)
+        {
+            return await _context.Patients.AnyAsync(x => x.Ci == patientCode);
+        }
+
+        public async Task<string?> GetLastPatientCode()
+        {
+            return await _context.Patients
+                                 .Where(x => x.Code.StartsWith("P-"))
+                                 .OrderByDescending(x => x.Code)
+                                 .Select(x => x.Code)
+                                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<string> GetCode(string ci)
+        {
+            return await _context.Patients.
+                         Where(x => x.Ci == ci).Select(x => x.Code).FirstOrDefaultAsync();
+        }
+
+
         public async Task<int> UpdateFile(UpdateFileDTO fileDto)
         {
             var result = await _context.Database.ExecuteSqlInterpolatedAsync($@"
