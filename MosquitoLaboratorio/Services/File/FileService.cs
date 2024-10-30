@@ -18,6 +18,7 @@ namespace MosquitoLaboratorio.Services.File
 
             fileDto.FileCode = fileCode; 
             fileDto.SampleCollectionDate = DateTime.UtcNow;
+            fileDto.TestResult = "Pendiente";
 
             var total = await _fileRepository.CreateFile(fileDto);
 
