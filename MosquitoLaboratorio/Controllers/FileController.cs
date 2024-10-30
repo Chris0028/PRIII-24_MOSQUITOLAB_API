@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Entities;
 using MosquitoLaboratorio.Services.Auth;
@@ -66,7 +67,7 @@ namespace MosquitoLaboratorio.Controllers
         [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> GetHistoryForLab([FromBody] int? laboratoryID)
         {
-            if(laboratoryID.HasValue)
+            if (laboratoryID.HasValue)
             {
                 var files = await _fileService.GetHistoryByLabId(laboratoryID.Value);
                 return Ok(files);
@@ -85,6 +86,25 @@ namespace MosquitoLaboratorio.Controllers
             var files = await _fileService.GetFileDetails(fileID);
             if (files is not null)
                 return Ok(files);
+            return BadRequest("Not data found");
+        }
+
+
+        [HttpPost, Route("HistoryFilterByHospitalId")]
+        public async Task<IActionResult> HistoryFilterByHospitalId([FromBody] HistoryFileFilterDTO? filterDTO)
+        {
+            var fileH = await _fileService.HistoryFilterByHospitalId(filterDTO);
+            if (fileH is not null)
+                return Ok(fileH);
+            return BadRequest("Not data found");
+        }
+
+        [HttpPost, Route("HistoryFilterByLabId")]
+        public async Task<IActionResult> HistoryFilterByLabId([FromBody] HistoryFileFilterDTO? filterDTO)
+        {
+            var fileL = await _fileService.HistoryFilterByLabId(filterDTO);
+            if (fileL is not null)
+                return Ok(fileL);
             return BadRequest("Not data found");
         }
     }

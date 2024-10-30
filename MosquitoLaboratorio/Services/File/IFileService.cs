@@ -11,5 +11,9 @@ namespace MosquitoLaboratorio.Services.File
         Task<List<HistoryFileDTO>> GetHistoryByLabId(int laboratoryID);
         Task<List<HistoryFileDTO>> GetAllHistory();
         Task<FileDetailsDTO> GetFileDetails(long fileId);
+
+        Task<List<HistoryFileDTO>> HistoryFilterByHospitalId(HistoryFileFilterDTO? filterDTO);
+        Task<List<HistoryFileDTO>> HistoryFilterByLabId(HistoryFileFilterDTO? filterDTO);
+
     }
 }

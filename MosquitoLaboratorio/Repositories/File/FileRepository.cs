@@ -79,6 +79,22 @@ namespace MosquitoLaboratorio.Repositories.File
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<List<HistoryFileDTO>> HistoryFilterByHospitalId(HistoryFileFilterDTO? filterDTO)
+        {
+            var historyFilterH = await _context.HistoryFileResults
+            .FromSqlInterpolated($"SELECT * FROM ufcHistoryFileFilterH({ filterDTO.Id },{filterDTO?.Code ?? null},{filterDTO?.Ci ?? null},{filterDTO?.Names ?? null},{filterDTO?.LastName?? null},{filterDTO?.SecondLastName ?? null})")
+            .ToListAsync();
+            return historyFilterH;
+        }
+
+        public async Task<List<HistoryFileDTO>> HistoryFilterByLabId(HistoryFileFilterDTO? filterDTO)
+        {
+            var historyFilterL = await _context.HistoryFileResults
+            .FromSqlInterpolated($"SELECT * FROM ufcHistoryFileFilterL({filterDTO.Id},{filterDTO?.Code ?? null},{filterDTO?.Ci ?? null},{filterDTO?.Names ?? null},{filterDTO?.LastName ?? null},{filterDTO?.SecondLastName ?? null})")
+            .ToListAsync();
+            return historyFilterL;
+        }
+
         public async Task<int> UpdateFile(UpdateFileDTO fileDto)
         {
             var result = await _context.Database.ExecuteSqlInterpolatedAsync($@"

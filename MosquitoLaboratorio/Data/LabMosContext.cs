@@ -82,6 +82,7 @@ public class LabMosContext : DbContext
         modelBuilder.Entity<AuthUserDTO>().HasNoKey();
         modelBuilder.Entity<UpdateTestSampleDTO>().HasNoKey();
         modelBuilder.Entity<FileDetailsDTO>().HasNoKey();
+
         base.OnModelCreating(modelBuilder);   
     }
 }

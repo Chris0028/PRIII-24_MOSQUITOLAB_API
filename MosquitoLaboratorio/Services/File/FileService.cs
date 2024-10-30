@@ -70,5 +70,21 @@ namespace MosquitoLaboratorio.Services.File
 
             return 0;
         }
+
+        public async Task<List<HistoryFileDTO>> HistoryFilterByHospitalId(HistoryFileFilterDTO? filterDTO)
+        {
+            var filesH = await _fileRepository.HistoryFilterByHospitalId(filterDTO);
+            if (filesH != null)
+                return filesH;
+            return null!;
+        }
+
+        public async Task<List<HistoryFileDTO>> HistoryFilterByLabId(HistoryFileFilterDTO? filterDTO)
+        {
+            var filesL = await _fileRepository.HistoryFilterByLabId(filterDTO);
+            if (filesL != null)
+                return filesL;
+            return null!;
+        }
     }
 }
