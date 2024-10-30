@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MosquitoLaboratorio.Data;
-using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Entities;
 
 namespace MosquitoLaboratorio.Repositories.Sample

@@ -13,5 +13,7 @@ namespace MosquitoLaboratorio.Repositories.File
         public Task<List<HistoryFileDTO>> GetAllHistory();
         public Task<long> GetLastFileId();
         public Task<FileDetailsDTO> GetFileDetails(long fileId);
+        public Task<List<ReportFileDTO>> GetReportFileList(ReportFileParametersDTO dto);
+
     }
 }

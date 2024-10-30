@@ -125,12 +125,7 @@ namespace MosquitoLaboratorio.Dtos.File
         public string? SampleSampleType { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime? SampleCollectionDate
-        {
-            get => _sampleCollectionDate;
-            set => _sampleCollectionDate = value.HasValue ? DateTime.SpecifyKind(value.Value, DateTimeKind.Utc) : (DateTime?)null;
-        }
-        private DateTime? _sampleCollectionDate;
+        public DateTime? SampleCollectionDate{  get; set;}
 
         public string? SampleObservation { get; set; }
 
