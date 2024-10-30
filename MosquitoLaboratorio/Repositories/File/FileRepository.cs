@@ -75,11 +75,11 @@ namespace MosquitoLaboratorio.Repositories.File
         {
             var result = await _context.UfcReportFile.FromSqlInterpolated($@"
                 SELECT * FROM ufc_reports_file(
-                    {dto.LaboratoryId}::INTEGER, {dto.SymptomsDateFrom}::DATE, {dto.SymptomsDateTo}::DATE,
-                    {dto.NotificationDateFrom}::DATE, {dto.NotificationDateTo}::DATE, {dto.ResultDateFrom}::DATE,
-                    {dto.ResultDateTo}::DATE,{dto.CaseStatus}::SMALLINT,{dto.DiagnosticMethod}::VARCHAR,{dto.Department}::VARCHAR,
-                    {dto.HealthNetwork}::VARCHAR,{dto.Municipality}::VARCHAR,{dto.Establishment}::VARCHAR,
-                    {dto.Subsector}::VARCHAR)").ToListAsync();
+                    {dto?.LaboratoryId ?? null}::INTEGER, {dto?.SymptomsDateFrom ?? null}::DATE, {dto?.SymptomsDateTo ?? null}::DATE,
+                    {dto?.NotificationDateFrom ?? null}::DATE, {dto?.NotificationDateTo ?? null}::DATE, {dto?.ResultDateFrom ?? null}::DATE,
+                    {dto?.ResultDateTo ?? null}::DATE,{dto?.CaseStatus ?? null}::SMALLINT,{dto?.DiagnosticMethod ?? null}::VARCHAR,{dto?.Department ?? null}::VARCHAR,
+                    {dto?.HealthNetwork ?? null}::VARCHAR,{dto?.Municipality ?? null}::VARCHAR,{dto?.Establishment ?? null}::VARCHAR,
+                    {dto?.Subsector ?? null}::SMALLINT)").ToListAsync();
 
             return result;
         }
