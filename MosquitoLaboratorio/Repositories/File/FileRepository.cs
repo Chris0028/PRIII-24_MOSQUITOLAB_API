@@ -40,7 +40,7 @@ namespace MosquitoLaboratorio.Repositories.File
 
         public async Task<List<HistoryFileDTO>> GetAllHistory()
         {
-            var results = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufcHistoryFileDoctor()").ToListAsync();
+            var results = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufchistorylab()").ToListAsync();
             return results;
         }
         public async Task<FileDetailsDTO> GetFileDetails(long fileId)
