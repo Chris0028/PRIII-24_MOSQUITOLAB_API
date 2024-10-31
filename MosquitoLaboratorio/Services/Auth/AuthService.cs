@@ -17,20 +17,23 @@ namespace MosquitoLaboratorio.Services.Auth
             Hasher hasher = new();
             var user = await _authRepository.Authenticate(dTO);
 
-            if (hasher.VerifyPassword(dTO.Password!, user.Password))
+            if(user != null)
             {
-                if (user.Role!.Equals("Doctor"))
+                if (hasher.VerifyPassword(dTO.Password!, user.Password))
                 {
-                    var doctor = JsonConvert.DeserializeObject<DoctorAuth>(user.Info);
-                    user.AditionalInfo = doctor!;
+                    if (user.Role!.Equals("Doctor"))
+                    {
+                        var doctor = JsonConvert.DeserializeObject<DoctorAuth>(user.Info);
+                        user.AditionalInfo = doctor!;
+                    }
+                    else if (user.Role.Equals("Employee") || user.Role.Equals("Admin"))
+                    {
+                        var employee = JsonConvert.DeserializeObject<EmployeeAuth>(user.Info);
+                        user.AditionalInfo = employee!;
+                    }
+                    user.Info = null!;
+                    return user;
                 }
-                else if (user.Role.Equals("Employee") || user.Role.Equals("Admin"))
-                {
-                    var employee = JsonConvert.DeserializeObject<EmployeeAuth>(user.Info);
-                    user.AditionalInfo = employee!;
-                }
-                user.Info = null!;
-                return user;
             }
             return null!;
         }
