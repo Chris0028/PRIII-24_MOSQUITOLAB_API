@@ -79,6 +79,19 @@ namespace MosquitoLaboratorio.Repositories.File
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<List<ReportFileDTO>> GetReportFileList(ReportFileParametersDTO dto)
+        {
+            var result = await _context.UfcReportFile.FromSqlInterpolated($@"
+                SELECT * FROM ufc_reports_file(
+                    {dto?.LaboratoryId ?? null}::INTEGER, {dto?.SymptomsDateFrom ?? null}::DATE, {dto?.SymptomsDateTo ?? null}::DATE,
+                    {dto?.NotificationDateFrom ?? null}::DATE, {dto?.NotificationDateTo ?? null}::DATE, {dto?.ResultDateFrom ?? null}::DATE,
+                    {dto?.ResultDateTo ?? null}::DATE,{dto?.CaseStatus ?? null}::SMALLINT,{dto?.DiagnosticMethod ?? null}::VARCHAR,{dto?.Department ?? null}::VARCHAR,
+                    {dto?.HealthNetwork ?? null}::VARCHAR,{dto?.Municipality ?? null}::VARCHAR,{dto?.Establishment ?? null}::VARCHAR,
+                    {dto?.Subsector ?? null}::SMALLINT)").ToListAsync();
+
+            return result;
+        }
+
         public async Task<List<HistoryFileDTO>> HistoryFilterByHospitalId(HistoryFileFilterDTO? filterDTO)
         {
             var historyFilterH = await _context.HistoryFileResults

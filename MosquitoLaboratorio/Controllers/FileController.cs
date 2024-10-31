@@ -79,6 +79,7 @@ namespace MosquitoLaboratorio.Controllers
             }
         }
 
+
         [HttpPost, Route("GetFileDetails")]
 
         public async Task<IActionResult> GetFileDetails([FromBody] long fileID)
@@ -87,6 +88,18 @@ namespace MosquitoLaboratorio.Controllers
             if (files is not null)
                 return Ok(files);
             return BadRequest("Not data found");
+        }
+
+        [HttpPost, Route("GetReportsList")]
+        public async Task<IActionResult> GetReportFileList([FromBody] ReportFileParametersDTO dto)
+        {
+            var reports = await _fileService.GetReportFileList(dto);
+            if (reports is not null)
+            {
+                return Ok(reports);
+            }
+            return NoContent();
+
         }
 
 

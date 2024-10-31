@@ -19,6 +19,8 @@ namespace MosquitoLaboratorio.Services.File
             var fileCode = $"CB-{newFileId}";
 
             fileDto.FileCode = fileCode; 
+            fileDto.SampleCollectionDate = DateTime.UtcNow;
+            fileDto.TestResult = "Pendiente";
 
             var total = await _fileRepository.CreateFile(fileDto);
 
@@ -55,6 +57,14 @@ namespace MosquitoLaboratorio.Services.File
             var files = await _fileRepository.GetHistoryByLabId(laboratoryID);
             if (files is not null)
                 return files;
+            return null;
+        }
+
+        public async Task<List<ReportFileDTO>> GetReportFileList(ReportFileParametersDTO dto)
+        {
+            var reports = await _fileRepository.GetReportFileList(dto);
+            if (reports is not null)
+                return reports;
             return null;
         }
 

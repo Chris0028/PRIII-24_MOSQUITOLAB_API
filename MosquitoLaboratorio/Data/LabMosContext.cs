@@ -72,6 +72,7 @@ public class LabMosContext : DbContext
 
 
     public DbSet<UpdateTestSampleDTO> UfcTestUpdate { get; set; }
+    public DbSet<ReportFileDTO> UfcReportFile { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -82,7 +83,7 @@ public class LabMosContext : DbContext
         modelBuilder.Entity<AuthUserDTO>().HasNoKey();
         modelBuilder.Entity<UpdateTestSampleDTO>().HasNoKey();
         modelBuilder.Entity<FileDetailsDTO>().HasNoKey();
-
+        modelBuilder.Entity<ReportFileDTO>().HasNoKey();
         base.OnModelCreating(modelBuilder);   
     }
 }
