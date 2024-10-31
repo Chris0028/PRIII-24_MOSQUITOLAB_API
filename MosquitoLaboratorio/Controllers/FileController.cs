@@ -27,14 +27,22 @@ namespace MosquitoLaboratorio.Controllers
         public async Task<IActionResult> CreateFile(CreateFileDTO dTO)
         {
             var file = await _fileService.CreateFile(dTO);
-            if (file != 0)
+
+            if (file == 10)
+            {
+                return BadRequest("No se puede crear una nueva ficha: existe una ficha pendiente para esta enfermedad.");
+            }
+
+            if (file == -1)
             {
                 await _hubContext.Clients.Group(dTO.TestLaboratoryId.ToString())
-                                     .SendAsync("ReceiveNotification", "Nueva ficha a la espera de revision");
+                                         .SendAsync("ReceiveNotification", "Nueva ficha a la espera de revisión");
                 return StatusCode(201, file);
             }
-            return BadRequest();
+
+            return BadRequest("No se pudo crear la ficha debido a un error inesperado.");
         }
+
 
         [HttpPatch, Route("UpdateFile")]
         public async Task<IActionResult> UpdateFile([FromBody] UpdateFileDTO dTO)

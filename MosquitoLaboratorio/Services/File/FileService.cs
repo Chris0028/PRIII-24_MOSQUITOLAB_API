@@ -13,6 +13,12 @@ namespace MosquitoLaboratorio.Services.File
         public FileService (IFileRepository fileRepository) => _fileRepository = fileRepository;
         public async Task<int> CreateFile(CreateFileDTO fileDto)
         {
+            bool hasPendingFile = await _fileRepository.HasPendingFileByCI(fileDto.PatientCi, fileDto.CaseDiseaseId);
+            if (hasPendingFile)
+            {
+                return 10;
+            }
+
             var lastFileId = await _fileRepository.GetLastFileId();
             var newFileId = lastFileId + 1;
 
@@ -96,5 +102,6 @@ namespace MosquitoLaboratorio.Services.File
                 return filesL;
             return null!;
         }
+
     }
 }

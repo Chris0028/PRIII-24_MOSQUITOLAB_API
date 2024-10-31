@@ -15,8 +15,8 @@ namespace MosquitoLaboratorio.Repositories.File
         public Task<FileDetailsDTO> GetFileDetails(long fileId);
         public Task<List<ReportFileDTO>> GetReportFileList(ReportFileParametersDTO dto);
 
-
         public Task<List<HistoryFileDTO>> HistoryFilterByHospitalId(HistoryFileFilterDTO? filterDTO);
         public Task<List<HistoryFileDTO>> HistoryFilterByLabId(HistoryFileFilterDTO? filterDTO);
+        public Task<bool> HasPendingFileByCI(string patientCI, int diseaseId);
     }
 }

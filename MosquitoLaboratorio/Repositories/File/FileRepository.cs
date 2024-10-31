@@ -140,6 +140,16 @@ namespace MosquitoLaboratorio.Repositories.File
             return result;
         }
 
+        public async Task<bool> HasPendingFileByCI(string patientCI, int diseaseId)
+        {
+            var pendingFileExists = await _context.Files
+                .Join(_context.Patients, f => f.PatientId, p => p.Id, (f, p) => new { File = f, Patient = p })
+                .Join(_context.Cases, fp => fp.File.Id, c => c.FileId, (fp, c) => new { FilePatient = fp, Case = c })
+                .AnyAsync(fpc => fpc.FilePatient.Patient.Ci == patientCI &&
+                                 fpc.Case.DiseaseId == diseaseId &&
+                                 fpc.FilePatient.File.Status == 0);
+            return pendingFileExists;
+        }
 
     }
 }
