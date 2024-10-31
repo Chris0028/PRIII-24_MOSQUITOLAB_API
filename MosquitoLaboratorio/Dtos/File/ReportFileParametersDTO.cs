@@ -75,7 +75,7 @@
         public string? Establishment { get; set; }
 
         [Column("subsector")]
-        public string? Subsector { get; set; }
+        public short? Subsector { get; set; }
     }
 
 

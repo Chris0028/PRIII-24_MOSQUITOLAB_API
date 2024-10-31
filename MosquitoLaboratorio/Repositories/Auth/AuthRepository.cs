@@ -3,6 +3,7 @@ using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.Auth;
 using MosquitoLaboratorio.Entities;
+using Npgsql;
 
 namespace MosquitoLaboratorio.Repositories.Auth
 {
@@ -14,9 +15,16 @@ namespace MosquitoLaboratorio.Repositories.Auth
 
         public async Task<AuthUserDTO> Authenticate(UserDTO user)
         {
-            var auth = await _context.UfcUserAuth.FromSqlInterpolated($"SELECT * FROM ufcuserauth({user.UserName}, {user.Password})")
+            try
+            {
+                var auth = await _context.UfcUserAuth.FromSqlInterpolated($"SELECT * FROM ufcuserauth({user.UserName}, {user.Password})")
                 .FirstOrDefaultAsync();
-            return auth!;
+                return auth!;
+            }
+            catch (PostgresException e)
+            {
+                return null!;
+            }
         }
     }
 }

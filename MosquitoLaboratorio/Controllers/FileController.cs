@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
-using Microsoft.EntityFrameworkCore;
+using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.File;
+using MosquitoLaboratorio.Entities;
 using MosquitoLaboratorio.Services.Auth;
 using MosquitoLaboratorio.Services.File;
 using MosquitoLaboratorio.Services.Hub;
@@ -66,7 +67,7 @@ namespace MosquitoLaboratorio.Controllers
         [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> GetHistoryForLab([FromBody] int? laboratoryID)
         {
-            if(laboratoryID.HasValue)
+            if (laboratoryID.HasValue)
             {
                 var files = await _fileService.GetHistoryByLabId(laboratoryID.Value);
                 return Ok(files);
@@ -77,6 +78,18 @@ namespace MosquitoLaboratorio.Controllers
                 return Ok(files);
             }
         }
+
+
+        [HttpPost, Route("GetFileDetails")]
+
+        public async Task<IActionResult> GetFileDetails([FromBody] long fileID)
+        {
+            var files = await _fileService.GetFileDetails(fileID);
+            if (files is not null)
+                return Ok(files);
+            return BadRequest("Not data found");
+        }
+
         [HttpPost, Route("GetReportsList")]
         public async Task<IActionResult> GetReportFileList([FromBody] ReportFileParametersDTO dto)
         {
@@ -86,6 +99,26 @@ namespace MosquitoLaboratorio.Controllers
                 return Ok(reports);
             }
             return NoContent();
+
+        }
+
+
+        [HttpPost, Route("HistoryFilterByHospitalId")]
+        public async Task<IActionResult> HistoryFilterByHospitalId([FromBody] HistoryFileFilterDTO? filterDTO)
+        {
+            var fileH = await _fileService.HistoryFilterByHospitalId(filterDTO);
+            if (fileH is not null)
+                return Ok(fileH);
+            return BadRequest("Not data found");
+        }
+
+        [HttpPost, Route("HistoryFilterByLabId")]
+        public async Task<IActionResult> HistoryFilterByLabId([FromBody] HistoryFileFilterDTO? filterDTO)
+        {
+            var fileL = await _fileService.HistoryFilterByLabId(filterDTO);
+            if (fileL is not null)
+                return Ok(fileL);
+            return BadRequest("Not data found");
         }
     }
 }

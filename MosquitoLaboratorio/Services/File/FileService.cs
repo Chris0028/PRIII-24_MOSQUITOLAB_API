@@ -1,5 +1,7 @@
 ﻿using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.File;
+using MosquitoLaboratorio.Entities;
+using MosquitoLaboratorio.Repositories.Auth;
 using MosquitoLaboratorio.Repositories.File;
 
 namespace MosquitoLaboratorio.Services.File
@@ -16,12 +18,9 @@ namespace MosquitoLaboratorio.Services.File
 
             var fileCode = $"CB-{newFileId}";
 
-            var lastPatCode = await GetOrGeneratePatientCode(fileDto.PatientCi);
-
-            fileDto.PatientCode = lastPatCode;
-
             fileDto.FileCode = fileCode; 
             fileDto.SampleCollectionDate = DateTime.UtcNow;
+            fileDto.TestResult = "Pendiente";
 
             var total = await _fileRepository.CreateFile(fileDto);
 
@@ -33,6 +32,13 @@ namespace MosquitoLaboratorio.Services.File
             return 0;
         }
 
+        public async Task<FileDetailsDTO> GetFileDetails(long fileId)
+        {
+            var files = await _fileRepository.GetFileDetails(fileId);
+            if (files is not null)
+                return files;
+            return null;
+        }
         public async Task<List<HistoryFileDTO>> GetAllHistory()
         {
             return await _fileRepository.GetAllHistory();
@@ -75,36 +81,20 @@ namespace MosquitoLaboratorio.Services.File
             return 0;
         }
 
-        public async Task<string> GetOrGeneratePatientCode(string? patientCode)
+        public async Task<List<HistoryFileDTO>> HistoryFilterByHospitalId(HistoryFileFilterDTO? filterDTO)
         {
-            // Si se proporciona un código, verifica si existe
-            if (!string.IsNullOrEmpty(patientCode))
-            {
-                bool exists = await _fileRepository.PatientCodeExists(patientCode);
-                if (exists)
-                {
-                    // Si el código existe, lo devuelve
-                    string pat = await _fileRepository.GetCode(patientCode);
-                    if (!String.IsNullOrEmpty(pat))
-                        return pat;
-                }
-            }
+            var filesH = await _fileRepository.HistoryFilterByHospitalId(filterDTO);
+            if (filesH != null)
+                return filesH;
+            return null!;
+        }
 
-            // Si el código no existe o es nulo, genera un nuevo código
-            var lastCode = await _fileRepository.GetLastPatientCode();
-
-            // Genera el siguiente código en formato P-0001, P-0002, etc.
-            int nextNumber = 1;
-            if (!string.IsNullOrEmpty(lastCode))
-            {
-                // Extrae la parte numérica del último código y suma 1
-                nextNumber = int.Parse(lastCode.Split('-')[1]) + 1;
-            }
-
-            // Formatea el nuevo código con el siguiente número
-            string newCode = $"P-{nextNumber:D4}";
-
-            return newCode;
+        public async Task<List<HistoryFileDTO>> HistoryFilterByLabId(HistoryFileFilterDTO? filterDTO)
+        {
+            var filesL = await _fileRepository.HistoryFilterByLabId(filterDTO);
+            if (filesL != null)
+                return filesL;
+            return null!;
         }
     }
 }
