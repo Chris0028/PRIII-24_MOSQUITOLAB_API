@@ -1,4 +1,6 @@
-﻿namespace MosquitoLaboratorio.Dtos
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MosquitoLaboratorio.Dtos
 {
     public class HistoryFileDTO
     {
@@ -13,5 +15,7 @@
         public DateTime BirthDate { get; set; }
         public DateTime RegisterDate { get; set; }
         public string DiseaseName { get; set; }
+        public string CodePatient { get; set; }
+
     }
 }

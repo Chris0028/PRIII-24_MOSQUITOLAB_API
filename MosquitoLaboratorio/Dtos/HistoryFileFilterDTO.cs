@@ -1,12 +1,16 @@
-﻿namespace MosquitoLaboratorio.Dtos
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MosquitoLaboratorio.Dtos
 {
     public class HistoryFileFilterDTO
     {
-        public long Id { get; set; }
+        public long? Id { get; set; }
         public string? Code { get; set; }
         public string? Ci { get; set; }
         public string? Names { get; set; }
         public string? LastName { get; set; }
         public string? SecondLastName { get; set; }
+        public string? CodePatient { get; set; }
+
     }
 }
