@@ -68,6 +68,39 @@ namespace MosquitoLaboratorio.Services.File
             return null;
         }
 
+        public async Task<string> GetOrGeneratePatientCode(string? patientCode)
+        {
+            // Si se proporciona un código, verifica si existe
+            if (!string.IsNullOrEmpty(patientCode))
+            {
+                bool exists = await _fileRepository.PatientCodeExists(patientCode);
+                if (exists)
+                {
+                    // Si el código existe, lo devuelve
+                    string pat = await _fileRepository.GetCode(patientCode);
+                    if (!String.IsNullOrEmpty(pat))
+                        return pat;
+                }
+            }
+
+            // Si el código no existe o es nulo, genera un nuevo código
+            var lastCode = await _fileRepository.GetLastPatientCode();
+
+            // Genera el siguiente código en formato P-0001, P-0002, etc.
+            int nextNumber = 1;
+            if (!string.IsNullOrEmpty(lastCode))
+            {
+                // Extrae la parte numérica del último código y suma 1
+                nextNumber = int.Parse(lastCode.Split('-')[1]) + 1;
+            }
+
+            // Formatea el nuevo código con el siguiente número
+            string newCode = $"P-{nextNumber:D4}";
+
+            return newCode;
+        }
+
+
         public async Task<int> UpdateFile(UpdateFileDTO fileDto)
         {
 
