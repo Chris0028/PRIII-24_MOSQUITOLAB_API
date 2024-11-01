@@ -24,6 +24,9 @@ namespace MosquitoLaboratorio.Services.File
 
             var fileCode = $"CB-{newFileId}";
 
+            var lastPatCode = await GetOrGeneratePatientCode(fileDto.PatientCi);
+            fileDto.PatientCode = lastPatCode;
+
             fileDto.FileCode = fileCode; 
             fileDto.SampleCollectionDate = DateTime.UtcNow;
             fileDto.TestResult = "Pendiente";
