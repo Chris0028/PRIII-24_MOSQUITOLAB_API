@@ -17,7 +17,7 @@ namespace MosquitoLaboratorio.Repositories.File
         public Task<bool> PatientCodeExists(string patientCode);
         public Task<string?> GetLastPatientCode();
         public Task<string> GetCode(string ci);
-
+        public Task<FileWithResultDTO> GetFileWithResult(long fileId);
         public Task<List<HistoryFileDTO>> HistoryFilterByHospitalId(HistoryFileFilterDTO? filterDTO);
         public Task<List<HistoryFileDTO>> HistoryFilterByLabId(HistoryFileFilterDTO? filterDTO);
         public Task<bool> HasPendingFileByCI(string patientCI, int diseaseId);

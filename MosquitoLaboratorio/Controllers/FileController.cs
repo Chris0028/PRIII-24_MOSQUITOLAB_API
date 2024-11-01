@@ -128,5 +128,14 @@ namespace MosquitoLaboratorio.Controllers
                 return Ok(fileL);
             return BadRequest("Not data found");
         }
+
+        [HttpPost, Route("GetFileWithResult")]
+        public async Task<IActionResult> GetFileWithResultAsync([FromBody]long fileId)
+        {
+            var fileSerialize = await _fileService.GetFileWithResult(fileId);
+            if (fileSerialize != null)
+                return Ok(fileSerialize);
+            return BadRequest();
+        }
     }
 }
