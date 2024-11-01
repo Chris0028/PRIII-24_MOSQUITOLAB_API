@@ -136,5 +136,10 @@ namespace MosquitoLaboratorio.Services.File
             return null!;
         }
 
+        public async Task<FileWithResultDTO> GetFileWithResult(long fileId)
+        {
+            var fileSerialize = await _fileRepository.GetFileWithResult(fileId);
+            return fileSerialize!;
+        }
     }
 }

@@ -172,5 +172,11 @@ namespace MosquitoLaboratorio.Repositories.File
             return pendingFileExists;
         }
 
+        public async Task<FileWithResultDTO> GetFileWithResult(long fileId)
+        {
+            var file = await _context.UfcGetFileWithResult.FromSqlInterpolated($"SELECT * FROM ufc_get_file_with_result({fileId})")
+                .FirstOrDefaultAsync();
+            return file!;
+        }
     }
 }
