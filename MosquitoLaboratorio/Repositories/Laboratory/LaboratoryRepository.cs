@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MosquitoLaboratorio.Data;
+using MosquitoLaboratorio.Dtos;
 
 namespace MosquitoLaboratorio.Repositories.Laboratory
 {
@@ -13,6 +14,15 @@ namespace MosquitoLaboratorio.Repositories.Laboratory
         {
             var laboratories = await _context.Laboratories.ToListAsync();
             return laboratories!;
+        }
+
+        public async Task<List<LaboratoryDTO>> GetNamesNIds()
+        {
+            return await _context.Laboratories.Select(l => new LaboratoryDTO
+            {
+                Id = l.Id,
+                Name = l.Name,
+            }).ToListAsync();
         }
     }
 }

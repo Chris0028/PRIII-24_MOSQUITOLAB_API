@@ -21,14 +21,24 @@ namespace MosquitoLaboratorio.Controllers
 
         [HttpPost, Route("SignIn")]
         [AllowAnonymous]
-        public async Task<IActionResult> Authenticate([FromBody] UserDTO dTO)
+        public async Task<IActionResult> Authenticate([FromBody] LoginDTO dTO)
         {
             var auth = await _authService.Authenticate(dTO);
             if (auth == null)
                 return BadRequest();
             var jwtManager = new JwtManager();
             string jwt = jwtManager.GenerateJwtToken(auth.UserId, auth.UserName!, auth.Role!, _configuration);
-            return Ok(new { jwt = jwt, info = auth.AditionalInfo });
+            return Ok(new { jwt = jwt, info = auth.AditionalInfo, status = auth.Status, firstLogin = auth.FirstLogin });
+        }
+
+        [HttpPost, Route("ChangePassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ChangePassword([FromBody]ChangePasswordDTO changePasswordDTO)
+        {
+            var success = await _authService.ChangePassword(changePasswordDTO);
+            if (success)
+                return Ok();
+            return BadRequest();
         }
     }
 }

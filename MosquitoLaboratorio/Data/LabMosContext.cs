@@ -73,6 +73,7 @@ public class LabMosContext : DbContext
     public DbSet<ReportFileDTO> UfcReportFile { get; set; }
     public DbSet<FileWithResultDTO> UfcGetFileWithResult { get; set; }
     public DbSet<CreateFileDTO> UfcCreateFile { get; set; }
+    public DbSet<UserDTO> UfcGetAllUsers { get; set; }
     #endregion
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -85,6 +86,7 @@ public class LabMosContext : DbContext
         modelBuilder.Entity<FileDetailsDTO>().HasNoKey();
         modelBuilder.Entity<ReportFileDTO>().HasNoKey();
         modelBuilder.Entity<FileWithResultDTO>().HasNoKey();
+        modelBuilder.Entity<UserDTO>().HasNoKey();
         base.OnModelCreating(modelBuilder);   
     }
 }

@@ -2,7 +2,6 @@
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.Auth;
-using MosquitoLaboratorio.Entities;
 using Npgsql;
 
 namespace MosquitoLaboratorio.Repositories.Auth
@@ -13,7 +12,7 @@ namespace MosquitoLaboratorio.Repositories.Auth
 
         public AuthRepository(LabMosContext context) => _context = context;
 
-        public async Task<AuthUserDTO> Authenticate(UserDTO user)
+        public async Task<AuthUserDTO> Authenticate(LoginDTO user)
         {
             try
             {
@@ -25,6 +24,12 @@ namespace MosquitoLaboratorio.Repositories.Auth
             {
                 return null!;
             }
+        }
+
+        public async Task<int> ChangePassword(Entities.User userChangedPasswordDTO)
+        {
+            _context.Entry(userChangedPasswordDTO).State = EntityState.Modified;
+            return await _context.SaveChangesAsync();
         }
     }
 }

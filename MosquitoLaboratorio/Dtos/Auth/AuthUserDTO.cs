@@ -16,6 +16,12 @@ namespace MosquitoLaboratorio.Dtos.Auth
         [Column("password")]
         public string Password { get; set; }
 
+        [Column("status")]
+        public short Status { get; set; }
+
+        [Column("firstlogin")]
+        public short FirstLogin { get; set; }   
+
         [Column("extra_info")]
         public string? Info { get; set; }
 

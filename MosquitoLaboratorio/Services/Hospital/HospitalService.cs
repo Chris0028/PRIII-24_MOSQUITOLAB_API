@@ -1,4 +1,5 @@
-﻿using MosquitoLaboratorio.Repositories.Hospital;
+﻿using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Repositories.Hospital;
 
 namespace MosquitoLaboratorio.Services.Hospital
 {
@@ -15,6 +16,11 @@ namespace MosquitoLaboratorio.Services.Hospital
                 return hospitals!;
 
             return null!;
+        }
+
+        public async Task<List<HospitalDTO>> GetNamesNIds()
+        {
+            return await _hospitalRepository.GetNamesNIds();
         }
     }
 }

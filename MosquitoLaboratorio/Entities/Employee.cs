@@ -26,6 +26,10 @@ public class Employee
     [StringLength(10)]
     public string Phone { get; set; }
 
+    [Column("email")]
+    [StringLength(80)]
+    public string Email { get; set; }
+
     [Column("userId")]
     public int UserId { get; set; }
 
@@ -33,7 +37,7 @@ public class Employee
     public int LaboratoryId { get; set; }
 
     [Column("registerDate", TypeName = "timestamp without time zone")]
-    public DateTime RegisterDate { get; set; }
+    public DateTime RegisterDate { get; set; } = DateTime.Now;
 
     [Column("lastUpdate", TypeName = "timestamp without time zone")]
     public DateTime? LastUpdate { get; set; }

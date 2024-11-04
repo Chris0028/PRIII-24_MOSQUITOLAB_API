@@ -35,7 +35,7 @@ public class Doctor
     public string? Sedes { get; set; }
 
     [Column("registerDate", TypeName = "timestamp without time zone")]
-    public DateTime RegisterDate { get; set; }
+    public DateTime RegisterDate { get; set; } = DateTime.Now;
 
     [Column("lastUpdate", TypeName = "timestamp without time zone")]
     public DateTime? LastUpdate { get; set; }

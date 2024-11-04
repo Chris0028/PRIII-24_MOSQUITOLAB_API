@@ -1,4 +1,5 @@
 ﻿
+using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Repositories.Laboratory;
 
 namespace MosquitoLaboratorio.Services.Laboratory
@@ -16,6 +17,11 @@ namespace MosquitoLaboratorio.Services.Laboratory
                 return laboratories;
 
             return null!;
+        }
+
+        public async Task<List<LaboratoryDTO>> GetNamesNIds()
+        {
+            return await _laboratoryRepository.GetNamesNIds();
         }
     }
 }

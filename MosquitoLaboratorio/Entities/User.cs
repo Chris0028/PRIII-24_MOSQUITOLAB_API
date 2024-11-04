@@ -29,4 +29,10 @@ public class User
     [InverseProperty("User")]
     [NotMapped]
     public List<Employee>? Employees { get; set; }
+
+    [Column("status")]
+    public short Status { get; set; } = 1;
+
+    [Column("firstLogin")]
+    public short FirstLogin { get; set; }
 }

@@ -20,5 +20,12 @@ namespace MosquitoLaboratorio.Controllers
 
             return Ok(laboratories);
         }
+
+        [HttpGet, Route("GetNamesNIds")]
+        public async Task<IActionResult> GetNamesNIdsOfLabos()
+        {
+            var labos = await _laboratoryService.GetNamesNIds();
+            return Ok(labos);
+        }
     }
 }

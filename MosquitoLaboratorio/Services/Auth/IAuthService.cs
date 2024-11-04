@@ -5,6 +5,7 @@ namespace MosquitoLaboratorio.Services.Auth
 {
     public interface IAuthService
     {
-        public Task<AuthUserDTO> Authenticate(UserDTO user);
+        public Task<AuthUserDTO> Authenticate(LoginDTO user);
+        Task<bool> ChangePassword(ChangePasswordDTO changePasswordDTO);
     }
 }
