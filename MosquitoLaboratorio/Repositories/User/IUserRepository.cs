@@ -1,4 +1,5 @@
 ﻿using MosquitoLaboratorio.Dtos;
+using MosquitoLaboratorio.Entities;
 
 namespace MosquitoLaboratorio.Repositories.User
 {
@@ -12,5 +13,10 @@ namespace MosquitoLaboratorio.Repositories.User
         public Task<int> CountAll();
         public Task<Entities.User> GetUserByUsername(string username);
         public Task<int> ChangeFirstLoginValue(Entities.User user);
+        public Task<ProfileDTO> GetProfileEmployeeOrAdmin(int id);
+        public Task<ProfileDTO> GetProfileDoctor(int id);
+        public Task<int> Update(Entities.User target, dynamic type, ProfileDTO source);
+        public Task<Doctor> GetDoctorByUserId(int userId);
+        public Task<Employee> GetEmployeeByUserId(int userId);
     }
 }

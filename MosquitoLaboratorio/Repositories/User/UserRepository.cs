@@ -2,6 +2,7 @@
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Entities;
+using System.Numerics;
 
 namespace MosquitoLaboratorio.Repositories.User
 {
@@ -94,9 +95,82 @@ namespace MosquitoLaboratorio.Repositories.User
             return lastId;
         }
 
+        public async Task<ProfileDTO> GetProfileDoctor(int id)
+        {
+            var profile = await _context.Users.Join(_context.Doctors, u => u.Id, d => d.UserId,
+                (u, d) => new ProfileDTO()
+                {
+                    Name = d.Name,
+                    LastName = d.LastName,
+                    SecondLastName = d.LastName ?? null,
+                    Phone = d.Phone,
+                    Email = d.Email,
+                    Sedes = d.Sedes,
+                    UserId = u.Id,
+                    UserName = u.Username
+                }).Where(p => p.UserId.Equals(id)).FirstOrDefaultAsync();
+            return profile!;
+        }
+
+        public async Task<ProfileDTO> GetProfileEmployeeOrAdmin(int id)
+        {
+            var profile = await _context.Users.Join(_context.Employees, u => u.Id, e => e.UserId,
+                (u, e) => new ProfileDTO()
+                {
+                    Name = e.Names,
+                    LastName = e.LastName,
+                    SecondLastName = e.LastName ?? null,
+                    Phone = e.Phone,
+                    Email = e.Email,
+                    UserId = u.Id,
+                    UserName = u.Username
+                }).Where(p => p.UserId.Equals(id)).FirstOrDefaultAsync();
+            return profile!;
+        }
+
         public async Task<Entities.User> GetUserByUsername(string username)
         {
             return await _context.Users.FirstAsync(u => u.Username.Equals(username));
+        }
+
+        public async Task<int> Update(Entities.User target, dynamic type, ProfileDTO source)
+        {
+            target.Username = source.UserName;
+            _context.Entry(target).State = EntityState.Modified;
+            if(target.Role == "Doctor")
+            {
+                var doctor = type as Doctor;
+                doctor.Name = source.Name;
+                doctor.LastName = source.LastName;
+                doctor.SecondLastName = source.SecondLastName;
+                doctor.Phone = source.Phone;
+                doctor.Email = source.Email;
+                doctor.Sedes = source.Sedes;
+                doctor.LastUpdate = DateTime.Now;
+                _context.Entry(doctor).State = EntityState.Modified;
+            }
+            else
+            {
+                var employee = type as Employee;
+                employee.Names = source.Name;
+                employee.LastName = source.LastName;
+                employee.SecondLastName = source.SecondLastName;
+                employee.Phone = source.Phone;
+                employee.Email = source.Email;
+                employee.LastUpdate = DateTime.Now;
+                _context.Entry(employee).State = EntityState.Modified;
+            }
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<Doctor> GetDoctorByUserId(int userId)
+        {
+            return await _context.Doctors.FirstOrDefaultAsync(d => d.UserId.Equals(userId))!;
+        }
+
+        public async Task<Employee> GetEmployeeByUserId(int userId)
+        {
+            return await _context.Employees.FirstOrDefaultAsync(e => e.UserId.Equals(userId))!;
         }
     }
 }

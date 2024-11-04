@@ -94,5 +94,32 @@ namespace MosquitoLaboratorio.Services.User
             user.FirstLogin = 1;
             return await _userRepository.ChangeFirstLoginValue(user);
         }
+
+        public async Task<ProfileDTO> GetProfileEmployeeOrAdmin(int id)
+        {
+            var profile = await _userRepository.GetProfileEmployeeOrAdmin(id);
+            return profile;
+        }
+
+        public async Task<ProfileDTO> GetProfileDoctor(int id)
+        {
+            var profile = await _userRepository.GetProfileDoctor(id);
+            return profile;
+        }
+
+        public async Task<int> Update(ProfileDTO profile)
+        {
+            var user = await _userRepository.FindById(profile.UserId!.Value);
+            dynamic type = null!;
+            if (user != null)
+            {
+                if(user.Role == "Doctor")
+                    type = await _userRepository.GetDoctorByUserId(user.Id);
+                else
+                    type = await _userRepository.GetEmployeeByUserId(user.Id);
+                return await _userRepository.Update(user, type, profile);
+            }
+            return 0;
+        }
     }
 }

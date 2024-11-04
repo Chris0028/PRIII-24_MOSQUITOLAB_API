@@ -22,6 +22,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("Delete")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete([FromBody]int userId)
         {
             var userDeleted = await _userService.Delete(userId);
@@ -49,6 +50,32 @@ namespace MosquitoLaboratorio.Controllers
         {
             var success = await _userService.ChangeFirstLoginValue(username);
             if (success > 0)
+                return NoContent();
+            return BadRequest();
+        }
+
+        [HttpGet, Route("GetProfile")]
+        [Authorize]
+        public async Task<IActionResult> GetProfile(int id, string role)
+        {
+            if(role != "Doctor")
+            {
+                var getEmployeeOrAdminProfile = await _userService.GetProfileEmployeeOrAdmin(id);
+                return Ok(getEmployeeOrAdminProfile);
+            }
+            else
+            {
+                var getDoctorProfile = await _userService.GetProfileDoctor(id);
+                return Ok(getDoctorProfile);
+            }
+        }
+
+        [HttpPatch, Route("UpdateProfile/{id::int}")]
+        public async Task<IActionResult> UpdateProfile([FromRoute]int id, [FromBody]ProfileDTO profile)
+        {
+            profile.UserId = id;
+            var response = await _userService.Update(profile);
+            if (response > 0)
                 return NoContent();
             return BadRequest();
         }
