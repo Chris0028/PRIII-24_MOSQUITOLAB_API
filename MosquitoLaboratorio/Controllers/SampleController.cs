@@ -13,11 +13,11 @@ namespace MosquitoLaboratorio.Controllers
         public SampleController(ISampleService sampleService) => _sampleService = sampleService;
 
         [HttpPost, Route("All")]
-        public async Task<IActionResult> GetSamples([FromBody]SampleDTO? sampleDTO)
+        public async Task<IActionResult> GetSamples([FromBody]SampleDTO? sampleDTO, int page = 1, int limit = 10)
         {
-            var samples = await _sampleService.GetSamples(sampleDTO);
+            var samples = await _sampleService.GetSamples(sampleDTO, page, limit);
             if(samples != null)
-                return Ok(samples);
+                return Ok(new {data = samples.Item1, total = samples.Item2});
             return Ok("Sin registros");
         }
 

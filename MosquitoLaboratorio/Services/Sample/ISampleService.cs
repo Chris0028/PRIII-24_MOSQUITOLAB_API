@@ -5,7 +5,7 @@ namespace MosquitoLaboratorio.Services.Sample
 {
     public interface ISampleService
     {
-        public Task<List<SampleDTO>> GetSamples(SampleDTO? sampleDTO);
+        public Task<Tuple<List<SampleDTO>, int>> GetSamples(SampleDTO? sampleDTO, int page, int limit);
         public Task<List<DiseaseDTO>> GetDiseases();
     }
 }

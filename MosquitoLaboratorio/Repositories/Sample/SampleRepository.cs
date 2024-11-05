@@ -11,10 +11,10 @@ namespace MosquitoLaboratorio.Repositories.Sample
 
         public SampleRepository(LabMosContext context) => _context = context;
 
-        public async Task<List<SampleDTO>> GetSamples(SampleDTO? sampleDTO)
+        public async Task<List<SampleDTO>> GetSamples(SampleDTO? sampleDTO, int offset, int limit)
         {
             var getSamples = await _context.UfcSampleList
-            .FromSqlInterpolated($"SELECT * FROM ufcsamplelist({sampleDTO?.SampleId ?? null},{sampleDTO?.PatientFullName ?? null},{sampleDTO?.DiseaseId ?? null},{sampleDTO?.RegisterDate ?? null})")
+            .FromSqlInterpolated($"SELECT * FROM ufcsamplelist({sampleDTO?.SampleId ?? null},{sampleDTO?.PatientFullName ?? null},{sampleDTO?.DiseaseId ?? null},{sampleDTO?.RegisterDate ?? null}) OFFSET {offset} LIMIT {limit}")
             .ToListAsync();
             return getSamples;
         }
@@ -23,6 +23,11 @@ namespace MosquitoLaboratorio.Repositories.Sample
         {
             var diseases = await _context.Diseases.ToListAsync();
             return diseases;
+        }
+
+        public async Task<int> CountAll()
+        {
+            return await _context.UfcSampleList.FromSql($"SELECT id FROM ufcsamplelist()").CountAsync();
         }
     }
 }
