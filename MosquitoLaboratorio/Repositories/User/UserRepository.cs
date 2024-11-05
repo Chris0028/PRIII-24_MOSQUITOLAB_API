@@ -101,7 +101,7 @@ namespace MosquitoLaboratorio.Repositories.User
                 {
                     Name = d.Name,
                     LastName = d.LastName,
-                    SecondLastName = d.LastName ?? null,
+                    SecondLastName = d.SecondLastName ?? null,
                     Phone = d.Phone,
                     Email = d.Email,
                     Sedes = d.Sedes,
