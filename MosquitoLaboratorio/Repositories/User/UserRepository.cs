@@ -2,7 +2,6 @@
 using MosquitoLaboratorio.Data;
 using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Entities;
-using System.Numerics;
 
 namespace MosquitoLaboratorio.Repositories.User
 {
@@ -66,7 +65,7 @@ namespace MosquitoLaboratorio.Repositories.User
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> Delete(Entities.User user)
+        public async Task<int> ChangeStatus(Entities.User user)
         {
             if(user != null)
             {

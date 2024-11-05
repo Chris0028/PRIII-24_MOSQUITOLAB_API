@@ -11,13 +11,13 @@ namespace MosquitoLaboratorio.Services.User
 
         public UserService(IUserRepository userRepository) => _userRepository = userRepository;
 
-        public async Task<int> Delete(int userId)
+        public async Task<int> ChangeStatus(int userId, short newStatus)
         {
             var user = await GetUser(userId);
             if(user is not null)
             {
-                user.Status = 0;
-                return await _userRepository.Delete(user);
+                user.Status = newStatus;
+                return await _userRepository.ChangeStatus(user);
             }
             return 0;
         }

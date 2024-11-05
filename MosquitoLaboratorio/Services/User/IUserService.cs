@@ -4,7 +4,7 @@ namespace MosquitoLaboratorio.Services.User
 {
     public interface IUserService
     {
-        public Task<int> Delete(int userIds);
+        public Task<int> ChangeStatus(int userIds, short newStatus);
         public Task<Entities.User> GetUser(int id);
         public Task<int> New(NewUserDTO user);
         public string UsernameGenerator(string names, string lastName, string? secondLastName = null);

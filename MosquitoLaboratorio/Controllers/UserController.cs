@@ -21,11 +21,11 @@ namespace MosquitoLaboratorio.Controllers
             return Ok(new { data = users.Item1, total = users.Item2 });
         }
 
-        [HttpPost, Route("Delete")]
+        [HttpPatch, Route("ChangeStatus/{userId::int}")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Delete([FromBody]int userId)
+        public async Task<IActionResult> ChangeStatus([FromRoute]int userId, [FromBody]short newStatus)
         {
-            var userDeleted = await _userService.Delete(userId);
+            var userDeleted = await _userService.ChangeStatus(userId, newStatus);
             if (userDeleted > 0)
                 return NoContent();
             return BadRequest();
