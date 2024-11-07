@@ -24,6 +24,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("CreateFile")]
+        [Authorize]
         public async Task<IActionResult> CreateFile(CreateFileDTO dTO)
         {
             var file = await _fileService.CreateFile(dTO);
@@ -45,6 +46,7 @@ namespace MosquitoLaboratorio.Controllers
 
 
         [HttpPatch, Route("UpdateFile")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> UpdateFile([FromBody] UpdateFileDTO dTO)
         {
             var file = await _fileService.UpdateFile(dTO);
