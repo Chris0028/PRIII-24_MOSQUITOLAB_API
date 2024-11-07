@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using MosquitoLaboratorio.Data;
+using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.Test;
 
 namespace MosquitoLaboratorio.Repositories.Test
@@ -9,6 +10,12 @@ namespace MosquitoLaboratorio.Repositories.Test
     {
         private readonly LabMosContext _context;
         public TestRepository(LabMosContext context) => _context = context;
+
+        public async Task<TestResultDTO> GetTestSample(long fileId)
+        {
+            var testSample = await _context.UfcGetTest.FromSqlInterpolated($"SELECT * FROM ufc_get_test({fileId})").FirstOrDefaultAsync();
+            return testSample!;
+        }
 
         public async Task<UpdateTestSampleDTO> UpdateTestSample(UpdateTestSampleDTO dto)
         {
