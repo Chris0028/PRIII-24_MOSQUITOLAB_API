@@ -181,11 +181,17 @@ namespace MosquitoLaboratorio.Repositories.File
 
         public async Task<string> lastFileCode(int diseaseId)
         {
-            return await _context.Diseasesymptomfiles
+            var result = await _context.Diseasesymptomfiles
                 .Where(dsf => dsf.DiseaseId == diseaseId)
-                .OrderByDescending(dsf => dsf.FileId)
+                .Join(_context.Files,
+                      dsf => dsf.FileId,
+                      file => file.Id,
+                      (dsf, file) => new { File = file })
+                .OrderByDescending(dsf => dsf.File.Id)
                 .Select(dsf => dsf.File.Code)
-                .FirstOrDefaultAsync(); 
+                .FirstOrDefaultAsync();
+
+            return result;
         }
 
     }
