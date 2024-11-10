@@ -178,5 +178,15 @@ namespace MosquitoLaboratorio.Repositories.File
                 .FirstOrDefaultAsync();
             return file!;
         }
+
+        public async Task<string> lastFileCode(int diseaseId)
+        {
+            return await _context.Diseasesymptomfiles
+                .Where(dsf => dsf.DiseaseId == diseaseId)
+                .OrderByDescending(dsf => dsf.FileId)
+                .Select(dsf => dsf.File.Code)
+                .FirstOrDefaultAsync(); 
+        }
+
     }
 }

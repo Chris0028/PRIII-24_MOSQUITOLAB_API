@@ -19,15 +19,10 @@ namespace MosquitoLaboratorio.Services.File
                 return 10;
             }
 
-            var lastFileId = await _fileRepository.GetLastFileId();
-            var newFileId = lastFileId + 1;
+            var filecode = await NewFileCode(fileDto.CaseDiseaseId);
 
-            var fileCode = $"CB-{newFileId}";
-
-            var lastPatCode = await GetOrGeneratePatientCode(fileDto.PatientCi);
-            fileDto.PatientCode = lastPatCode;
-
-            fileDto.FileCode = fileCode; 
+            fileDto.FileCode = filecode; 
+            fileDto.PatientCode = filecode;
             fileDto.SampleCollectionDate = DateTime.UtcNow;
             fileDto.TestResult = "Pendiente";
 
@@ -39,6 +34,28 @@ namespace MosquitoLaboratorio.Services.File
             }
 
             return 0;
+        }
+        public async Task<string> NewFileCode(int diseaseId)
+        {
+
+            var lastCode = await _fileRepository.lastFileCode(diseaseId);
+
+            if (string.IsNullOrEmpty(lastCode))
+            {
+                return diseaseId switch
+                {
+                    1 => "D-1",
+                    2 => "C-1",
+                    3 => "Z-1"
+                };
+            }
+
+            var strings = lastCode.Split('-');
+            int id = int.Parse(strings[1]) + 1;
+
+            var newCode = $"{strings[0]}-{id}";
+
+            return newCode;
         }
 
         public async Task<FileDetailsDTO> GetFileDetails(long fileId)
@@ -79,31 +96,25 @@ namespace MosquitoLaboratorio.Services.File
 
         public async Task<string> GetOrGeneratePatientCode(string? patientCode)
         {
-            // Si se proporciona un código, verifica si existe
             if (!string.IsNullOrEmpty(patientCode))
             {
                 bool exists = await _fileRepository.PatientCodeExists(patientCode);
                 if (exists)
                 {
-                    // Si el código existe, lo devuelve
                     string pat = await _fileRepository.GetCode(patientCode);
                     if (!String.IsNullOrEmpty(pat))
                         return pat;
                 }
             }
 
-            // Si el código no existe o es nulo, genera un nuevo código
             var lastCode = await _fileRepository.GetLastPatientCode();
 
-            // Genera el siguiente código en formato P-0001, P-0002, etc.
             int nextNumber = 1;
             if (!string.IsNullOrEmpty(lastCode))
             {
-                // Extrae la parte numérica del último código y suma 1
                 nextNumber = int.Parse(lastCode.Split('-')[1]) + 1;
             }
 
-            // Formatea el nuevo código con el siguiente número
             string newCode = $"P-{nextNumber:D4}";
 
             return newCode;
