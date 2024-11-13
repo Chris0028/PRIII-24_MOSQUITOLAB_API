@@ -48,24 +48,33 @@ namespace MosquitoLaboratorio.Services.File
                 return files;
             return null;
         }
-        public async Task<List<HistoryFileDTO>> GetAllHistory()
+        public async Task<Tuple<List<HistoryFileDTO>, int>> GetAllHistory(int page, int limit)
         {
-            return await _fileRepository.GetAllHistory();
+            int offset = (page - 1) * limit;
+            var files = await _fileRepository.GetAllHistory(offset, limit);
+            int totalCount = await _fileRepository.CountAllHistory();
+            if (files != null)
+                return new Tuple<List<HistoryFileDTO>, int>(files, totalCount);
+            return null!;
         }
 
-        public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
+        public async Task<Tuple<List<HistoryFileDTO>, int>> GetHistoryByHospitalId(long? hospitalID, int page, int limit)
         {
-            var files = await _fileRepository.GetHistoryByHospitalId(hospitalID);
-            if (files is not null)
-                return files;
-            return null;
+            int offset = (page - 1) * limit;
+            var files = await _fileRepository.GetHistoryByHospitalId(hospitalID, offset, limit);
+            int totalCount = await _fileRepository.CountAllHos(hospitalID);
+            if (files != null)
+                return new Tuple<List<HistoryFileDTO>, int>(files, totalCount);
+            return null!;
         }
 
-        public async Task<List<HistoryFileDTO>> GetHistoryByLabId(int laboratoryID)
+        public async Task<Tuple<List<HistoryFileDTO>, int>> GetHistoryByLabId(int? laboratoryID, int page, int limit)
         {
-            var files = await _fileRepository.GetHistoryByLabId(laboratoryID);
-            if (files is not null)
-                return files;
+            int offset = (page - 1) * limit;
+            var files = await _fileRepository.GetHistoryByLabId(laboratoryID, offset, limit);
+            int totalCount = await _fileRepository.CountAllLab(laboratoryID);
+            if (files != null)
+                return new Tuple<List<HistoryFileDTO>, int>(files, totalCount);
             return null;
         }
 
@@ -144,5 +153,6 @@ namespace MosquitoLaboratorio.Services.File
             var fileSerialize = await _fileRepository.GetFileWithResult(fileId);
             return fileSerialize!;
         }
+
     }
 }

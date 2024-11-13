@@ -8,9 +8,15 @@ namespace MosquitoLaboratorio.Repositories.File
     {
         public Task<int> CreateFile(CreateFileDTO fileDto);
         public Task<int> UpdateFile(UpdateFileDTO fileDto);
-        public Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID);
-        public Task<List<HistoryFileDTO>> GetHistoryByLabId(int laboratoryID);
-        public Task<List<HistoryFileDTO>> GetAllHistory();
+        public Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long? hospitalID, int offset, int limit);
+        public Task<int> CountAllHos(long? hospitalID);
+        public Task<List<HistoryFileDTO>> GetHistoryByLabId(int? laboratoryID, int offset, int limit);
+        public Task<int> CountAllLab(int? laboratoryID);
+
+        public Task<List<HistoryFileDTO>> GetAllHistory(int offset, int limit);
+        public Task<int> CountAllHistory();
+
+
         public Task<long> GetLastFileId();
         public Task<FileDetailsDTO> GetFileDetails(long fileId);
         public Task<List<ReportFileDTO>> GetReportFileList(ReportFileParametersDTO dto);
@@ -21,5 +27,6 @@ namespace MosquitoLaboratorio.Repositories.File
         public Task<List<HistoryFileDTO>> HistoryFilterByHospitalId(HistoryFileFilterDTO? filterDTO);
         public Task<List<HistoryFileDTO>> HistoryFilterByLabId(HistoryFileFilterDTO? filterDTO);
         public Task<bool> HasPendingFileByCI(string patientCI, int diseaseId);
+        
     }
 }

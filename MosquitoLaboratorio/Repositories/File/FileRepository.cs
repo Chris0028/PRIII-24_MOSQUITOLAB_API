@@ -4,6 +4,7 @@ using MosquitoLaboratorio.Dtos;
 using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Entities;
 using Npgsql;
+using System.Collections.Generic;
 
 namespace MosquitoLaboratorio.Repositories.File
 {
@@ -38,9 +39,11 @@ namespace MosquitoLaboratorio.Repositories.File
             return result;
         }
 
-        public async Task<List<HistoryFileDTO>> GetAllHistory()
+        public async Task<List<HistoryFileDTO>> GetAllHistory(int offset, int limit)
         {
-            var results = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufchistorylab()").ToListAsync();
+            var results = await _context.HistoryFileResults
+                .FromSqlRaw($"SELECT * FROM ufchistorylab() OFFSET {offset} LIMIT {limit}")
+                .ToListAsync();
             return results;
         }
         public async Task<FileDetailsDTO> GetFileDetails(long fileId)
@@ -51,22 +54,22 @@ namespace MosquitoLaboratorio.Repositories.File
             return result;
         }
 
-        public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long hospitalID)
+        public async Task<List<HistoryFileDTO>> GetHistoryByHospitalId(long? hospitalID, int offset, int limit)
         {
             var param = new NpgsqlParameter("p_hospitalId", hospitalID);
 
             var results = await _context.HistoryFileResults
-                .FromSqlRaw("SELECT * FROM ufcHistoryFileDoctor({0})", param)
+                .FromSqlRaw($"SELECT * FROM ufcHistoryFileDoctor({hospitalID ?? null}) OFFSET {offset} LIMIT {limit}", param)
                 .ToListAsync();
             return results;
         }
 
-        public async Task<List<HistoryFileDTO>> GetHistoryByLabId(int laboratoryID)
+        public async Task<List<HistoryFileDTO>> GetHistoryByLabId(int? laboratoryID, int offset, int limit)
         {
             var param = new NpgsqlParameter("laboratoryid", laboratoryID);
 
             var results = await _context.HistoryFileResults
-                .FromSqlRaw("SELECT * FROM ufchistorylab({0})", param)
+                .FromSqlRaw($"SELECT * FROM ufchistorylab({laboratoryID ?? null}) OFFSET {offset} LIMIT {limit}", param)
                 .ToListAsync();
             return results;
         }
@@ -177,6 +180,24 @@ namespace MosquitoLaboratorio.Repositories.File
             var file = await _context.UfcGetFileWithResult.FromSqlInterpolated($"SELECT * FROM ufc_get_file_with_result({fileId})")
                 .FirstOrDefaultAsync();
             return file!;
+        }
+        
+        public async Task<int> CountAllHos(long? hospitalID)
+        {
+            var count = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufcHistoryFileDoctor({hospitalID ?? null})").CountAsync();
+            return count;
+        }
+
+        public async Task<int> CountAllLab(int? laboratoryID)
+        {
+            var count = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufchistorylab({laboratoryID ?? null})").CountAsync();
+            return count;
+        }
+
+        public async Task<int> CountAllHistory()
+        {
+            var count = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufchistorylab()").CountAsync();
+            return count;
         }
     }
 }

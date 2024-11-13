@@ -59,33 +59,33 @@ namespace MosquitoLaboratorio.Controllers
 
         [HttpPost, Route("HistoryFileByHospital")]
         [Authorize]
-        public async Task<IActionResult> GetHistoryByHospitalId([FromBody] long? hospitalID)
+        public async Task<IActionResult> GetHistoryByHospitalId([FromBody] long? hospitalID, int page = 1, int limit = 10)
         {
             if (hospitalID.HasValue)
             {
-                var files = await _fileService.GetHistoryByHospitalId(hospitalID!.Value);
-                return Ok(files);
+                var files = await _fileService.GetHistoryByHospitalId(hospitalID.Value, page, limit);
+                return Ok(new { data = files.Item1, total = files.Item2 });
             }
             else
             {
-                var files = await _fileService.GetAllHistory();
-                return Ok(files);
+                var files = await _fileService.GetAllHistory(page, limit);
+                return Ok(new { data = files.Item1, total = files.Item2 });
             }
         }
 
-        [HttpPost, Route("GetHistoryForLab")]
+        [HttpPost, Route("HistoryForLab")]
         [Authorize(Roles = "Admin,Employee")]
-        public async Task<IActionResult> GetHistoryForLab([FromBody] int? laboratoryID)
+        public async Task<IActionResult> GetHistoryForLab([FromBody] int? laboratoryID, int page = 1, int limit = 10)
         {
             if (laboratoryID.HasValue)
             {
-                var files = await _fileService.GetHistoryByLabId(laboratoryID.Value);
-                return Ok(files);
+                var files = await _fileService.GetHistoryByLabId(laboratoryID.Value, page, limit);
+                return Ok(new { data = files.Item1, total = files.Item2 });
             }
             else
             {
-                var files = await _fileService.GetAllHistory();
-                return Ok(files);
+                var files = await _fileService.GetAllHistory(page, limit);
+                return Ok(new { data = files.Item1, total = files.Item2 });
             }
         }
 
@@ -111,7 +111,6 @@ namespace MosquitoLaboratorio.Controllers
             return NoContent();
 
         }
-
 
         [HttpPost, Route("HistoryFilterByHospitalId")]
         public async Task<IActionResult> HistoryFilterByHospitalId([FromBody] HistoryFileFilterDTO? filterDTO)
@@ -139,5 +138,7 @@ namespace MosquitoLaboratorio.Controllers
                 return Ok(fileSerialize);
             return BadRequest();
         }
+
+        
     }
 }
