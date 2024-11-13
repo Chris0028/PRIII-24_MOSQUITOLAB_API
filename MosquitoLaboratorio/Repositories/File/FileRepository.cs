@@ -197,8 +197,16 @@ namespace MosquitoLaboratorio.Repositories.File
             return result;
         }
 
-        
-        
+        public async Task<int> CountAllHos(long? hospitalID)
+        {
+            var count = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufcHistoryFileDoctor({hospitalID ?? null})").CountAsync();
+            return count;
+        }
+        public async Task<int> CountAllLab(int? laboratoryID)
+        {
+            var count = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufchistorylab({laboratoryID ?? null})").CountAsync();
+            return count;
+        }
 
         public async Task<int> CountAllHistory()
         {
