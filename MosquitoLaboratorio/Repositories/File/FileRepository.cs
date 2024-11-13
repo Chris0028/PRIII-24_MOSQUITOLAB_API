@@ -181,18 +181,24 @@ namespace MosquitoLaboratorio.Repositories.File
                 .FirstOrDefaultAsync();
             return file!;
         }
-        
-        public async Task<int> CountAllHos(long? hospitalID)
+
+        public async Task<string> lastFileCode(int diseaseId)
         {
-            var count = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufcHistoryFileDoctor({hospitalID ?? null})").CountAsync();
-            return count;
+            var result = await _context.Diseasesymptomfiles
+                .Where(dsf => dsf.DiseaseId == diseaseId)
+                .Join(_context.Files,
+                      dsf => dsf.FileId,
+                      file => file.Id,
+                      (dsf, file) => new { File = file })
+                .OrderByDescending(dsf => dsf.File.Id)
+                .Select(dsf => dsf.File.Code)
+                .FirstOrDefaultAsync();
+
+            return result;
         }
 
-        public async Task<int> CountAllLab(int? laboratoryID)
-        {
-            var count = await _context.HistoryFileResults.FromSql($"SELECT * FROM ufchistorylab({laboratoryID ?? null})").CountAsync();
-            return count;
-        }
+        
+        
 
         public async Task<int> CountAllHistory()
         {
