@@ -24,6 +24,8 @@ using MosquitoLaboratorio.Repositories.Reports;
 using MosquitoLaboratorio.Services.Reports;
 using MosquitoLaboratorio.Repositories.User;
 using MosquitoLaboratorio.Services.User;
+using MosquitoLaboratorio.Repositories.Result;
+using MosquitoLaboratorio.Services.Result;
 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -56,7 +58,8 @@ builder.Services.AddScoped<IReportRepository, ReportRepository>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
-
+builder.Services.AddScoped<IResultRepository, ResultRepository>();
+builder.Services.AddScoped<IResultService, ResultService>();
 
 builder.Services.AddCors(options =>
 {
