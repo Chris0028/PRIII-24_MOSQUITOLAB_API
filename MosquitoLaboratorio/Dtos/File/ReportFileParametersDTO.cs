@@ -56,8 +56,8 @@
         }
         private DateTime? _resultDateTo;
 
-        [Column("case_status")]
-        public short? CaseStatus { get; set; }
+        [Column("test_result")]
+        public string? TestResult { get; set; } 
 
         [Column("diagnostic_method")]
         public string? DiagnosticMethod { get; set; }
@@ -77,6 +77,7 @@
         [Column("subsector")]
         public short? Subsector { get; set; }
     }
+
 
 
 }

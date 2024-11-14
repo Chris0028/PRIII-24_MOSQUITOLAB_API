@@ -11,8 +11,8 @@ namespace MosquitoLaboratorio.Dtos.File
         [Column("file_code")]
         public string? FileCode { get; set; }
 
-        [Column("file_status")]
-        public short? FileStatus { get; set; }
+        [Column("test_result")]
+        public string? TestResult { get; set; } 
 
         [Column("patient_ci")]
         public string? PatientCi { get; set; }
@@ -55,6 +55,9 @@ namespace MosquitoLaboratorio.Dtos.File
 
         [Column("notifier_center")]
         public string? NotifierCenter { get; set; }
+
+        [Column("laboratory_name")]
+        public string? LaboratoryName { get; set; } 
 
         [Column("symptoms_start_date")]
         public string? SymptomsStartDate { get; set; }
@@ -164,5 +167,6 @@ namespace MosquitoLaboratorio.Dtos.File
         [Column("observations")]
         public string? Observations { get; set; }
     }
+
 
 }

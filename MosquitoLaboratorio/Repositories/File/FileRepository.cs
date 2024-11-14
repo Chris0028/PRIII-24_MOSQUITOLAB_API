@@ -109,7 +109,7 @@ namespace MosquitoLaboratorio.Repositories.File
                 SELECT * FROM ufc_reports_file(
                     {dto?.LaboratoryId ?? null}::INTEGER, {dto?.SymptomsDateFrom ?? null}::DATE, {dto?.SymptomsDateTo ?? null}::DATE,
                     {dto?.NotificationDateFrom ?? null}::DATE, {dto?.NotificationDateTo ?? null}::DATE, {dto?.ResultDateFrom ?? null}::DATE,
-                    {dto?.ResultDateTo ?? null}::DATE,{dto?.CaseStatus ?? null}::SMALLINT,{dto?.DiagnosticMethod ?? null}::VARCHAR,{dto?.Department ?? null}::VARCHAR,
+                    {dto?.ResultDateTo ?? null}::DATE,{dto?.TestResult ?? null}::VARCHAR,{dto?.DiagnosticMethod ?? null}::VARCHAR,{dto?.Department ?? null}::VARCHAR,
                     {dto?.HealthNetwork ?? null}::VARCHAR,{dto?.Municipality ?? null}::VARCHAR,{dto?.Establishment ?? null}::VARCHAR,
                     {dto?.Subsector ?? null}::SMALLINT)").ToListAsync();
 
