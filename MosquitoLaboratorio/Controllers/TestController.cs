@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MosquitoLaboratorio.Dtos.Test;
-using MosquitoLaboratorio.Services.Laboratory;
 using MosquitoLaboratorio.Services.Test;
 
 namespace MosquitoLaboratorio.Controllers
