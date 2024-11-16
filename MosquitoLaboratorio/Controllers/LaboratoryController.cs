@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MosquitoLaboratorio.Services.Laboratory;
 
 namespace MosquitoLaboratorio.Controllers
@@ -12,6 +13,7 @@ namespace MosquitoLaboratorio.Controllers
         public LaboratoryController(ILaboratoryService laboratoryService) => _laboratoryService = laboratoryService;
 
         [HttpGet, Route("GetLaboratories")]
+        [Authorize]
         public async Task<IActionResult> GetLaboratories()
         {
             var laboratories = await _laboratoryService.GetLaboratories();
@@ -22,6 +24,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpGet, Route("GetNamesNIds")]
+        [Authorize]
         public async Task<IActionResult> GetNamesNIdsOfLabos()
         {
             var labos = await _laboratoryService.GetNamesNIds();

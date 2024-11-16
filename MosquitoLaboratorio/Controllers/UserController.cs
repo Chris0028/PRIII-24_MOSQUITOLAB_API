@@ -46,6 +46,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("ChangeFirstLogin")]
+        [AllowAnonymous]
         public async Task<IActionResult> ChangeFirstLogin([FromBody]string username)
         {
             var success = await _userService.ChangeFirstLoginValue(username);
@@ -71,6 +72,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPatch, Route("UpdateProfile/{id::int}")]
+        [Authorize]
         public async Task<IActionResult> UpdateProfile([FromRoute]int id, [FromBody]ProfileDTO profile)
         {
             profile.UserId = id;

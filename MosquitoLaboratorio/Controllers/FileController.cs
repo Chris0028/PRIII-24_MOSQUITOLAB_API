@@ -89,7 +89,6 @@ namespace MosquitoLaboratorio.Controllers
 
 
         [HttpPost, Route("GetFileDetails")]
-
         public async Task<IActionResult> GetFileDetails([FromBody] long fileID)
         {
             var files = await _fileService.GetFileDetails(fileID);
@@ -99,6 +98,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("GetReportsList")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> GetReportFileList([FromBody] ReportFileParametersDTO dto)
         {
             var reports = await _fileService.GetReportFileList(dto);
@@ -111,6 +111,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("HistoryFilterByHospitalId")]
+        [Authorize]
         public async Task<IActionResult> HistoryFilterByHospitalId([FromBody] HistoryFileFilterDTO? filterDTO)
         {
             var fileH = await _fileService.HistoryFilterByHospitalId(filterDTO);
@@ -120,6 +121,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("HistoryFilterByLabId")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> HistoryFilterByLabId([FromBody] HistoryFileFilterDTO? filterDTO)
         {
             var fileL = await _fileService.HistoryFilterByLabId(filterDTO);
@@ -129,6 +131,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpPost, Route("GetFileWithResult")]
+        [Authorize]
         public async Task<IActionResult> GetFileWithResultAsync([FromBody]long fileId)
         {
             var fileSerialize = await _fileService.GetFileWithResult(fileId);

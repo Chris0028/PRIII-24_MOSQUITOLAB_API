@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MosquitoLaboratorio.Services.Insurance;
 
@@ -13,6 +14,7 @@ namespace MosquitoLaboratorio.Controllers
         public InsuranceController(IInsuranceService insuranceService) => _insuranceService = insuranceService;
 
         [HttpGet, Route("GetInsurances")]
+        [Authorize]
         public async Task<ActionResult> GetInsurances()
         {
             var insurances = await _insuranceService.GetInsurances();

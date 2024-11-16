@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MosquitoLaboratorio.Dtos.File;
 using MosquitoLaboratorio.Services.Sample;
 
@@ -13,6 +14,7 @@ namespace MosquitoLaboratorio.Controllers
         public SampleController(ISampleService sampleService) => _sampleService = sampleService;
 
         [HttpPost, Route("All")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> GetSamples([FromBody]SampleDTO? sampleDTO, int page = 1, int limit = 10)
         {
             var samples = await _sampleService.GetSamples(sampleDTO, page, limit);
@@ -22,6 +24,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpGet, Route("GetDiseases")]
+        [Authorize]
         public async Task<IActionResult> GetDiseases()
         {
             var diseases = await _sampleService.GetDiseases();

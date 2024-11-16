@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MosquitoLaboratorio.Services.Location;
 
@@ -13,6 +14,7 @@ namespace MosquitoLaboratorio.Controllers
         public LocationController(ILocationService locationService) => _locationService = locationService;
 
         [HttpGet, Route("GetMunicipalities")]
+        [Authorize]
         public async Task<IActionResult> GetMunicipalities()
         {
             var municipalities = await _locationService.GetMunicipality();
@@ -23,6 +25,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpGet, Route("GetStates")]
+        [Authorize]
         public async Task<IActionResult> GetStates()
         {
             var states = await _locationService.GetStates();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MosquitoLaboratorio.Services.Reports;
 
@@ -12,6 +13,7 @@ namespace MosquitoLaboratorio.Controllers
         public ReportController(IReportService reportService) => _reportService = reportService;
 
         [HttpGet, Route("ReportByGender")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> ReportByGender()
         {
             var patients = await _reportService.ReportPatientByGender();
@@ -22,6 +24,7 @@ namespace MosquitoLaboratorio.Controllers
         }
 
         [HttpGet, Route("ReportByAge")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> ReportByAge()
         {
             var patients = await _reportService.ReportPatientByAge();
