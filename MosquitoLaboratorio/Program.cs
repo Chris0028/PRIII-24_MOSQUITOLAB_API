@@ -66,7 +66,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(MyAllowSpecificOrigins,
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173", "https://mosquito-laboratorio-appweb.onrender.com");
+            policy.WithOrigins("http://localhost:5173", "https://mosquito-lab-appweb.onrender.com");
             policy.WithMethods("GET", "POST", "DELETE", "PATCH");
             policy.AllowAnyHeader();
             policy.AllowCredentials(); 
