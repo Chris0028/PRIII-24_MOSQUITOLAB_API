@@ -38,6 +38,11 @@ namespace MosquitoLaboratorio.Dtos.File
         [Column("pregnant")]
         public string? Pregnant { get; set; }
 
+        [Column("latitude")]
+        public string? Latitude { get; set; }
+        [Column("longitude")]
+        public string? Longitude { get; set; }
+
         [Column("probable_infection_department")]
         public string? ProbableInfectionDepartment { get; set; }
 
