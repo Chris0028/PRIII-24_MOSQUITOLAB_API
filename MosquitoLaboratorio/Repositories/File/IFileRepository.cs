@@ -12,11 +12,8 @@ namespace MosquitoLaboratorio.Repositories.File
         public Task<int> CountAllHos(long? hospitalID);
         public Task<List<HistoryFileDTO>> GetHistoryByLabId(int? laboratoryID, int offset, int limit);
         public Task<int> CountAllLab(int? laboratoryID);
-
         public Task<List<HistoryFileDTO>> GetAllHistory(int offset, int limit);
         public Task<int> CountAllHistory();
-
-
         public Task<long> GetLastFileId();
         public Task<FileDetailsDTO> GetFileDetails(long fileId);
         public Task<List<ReportFileDTO>> GetReportFileList(ReportFileParametersDTO dto);
